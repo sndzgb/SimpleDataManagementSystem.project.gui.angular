@@ -1,0 +1,104 @@
+<div class="header" *ngLoading="user">
+    <h1>Edit user - <b>'{{ user?.username }}'</b></h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+
+<div class="content-container">
+    
+    <http-errors-display [errors]="errors"></http-errors-display>
+    
+    <form-required-fields-message></form-required-fields-message>
+
+    <br>
+
+    <form
+        *ngIf="user != undefined && user != null"
+        method="post" 
+        [formGroup]="formGroup" 
+        (ngSubmit)="onEditUserFormSubmitted()"
+    >
+        <div class="form-controls-container">
+            <div class="form-controls">
+
+                <br>
+
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>Password change required:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{user.isPasswordChangeRequired}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="input-control single-per-line">
+                    <div class="required">
+                        <label>Username:</label>
+                    </div>
+                    <div>
+                        <input type="text" formControlName="username" />
+                    </div>
+                    <div>
+                        <small *ngIf="this.formGroup.get('username')?.errors?.['required'] 
+                                && this.formGroup.get('username')?.touched">
+                            Username is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="required">
+                        <label for="role">Role:</label>
+                    </div>
+                    <div>
+                        <select *ngLoading="userRoles" id="role" formControlName="roleId">
+                            <option 
+                                [disabled]="r.name == 'Admin'" 
+                                [selected]="user.roleId == r.id" 
+                                *ngFor="let r of userRoles" 
+                                [value]="r.id"
+                            >
+                                {{ r.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <small *ngIf="this.formGroup.get('roleId')?.errors?.['required'] 
+                                && this.formGroup.get('roleId')?.touched">
+                            Role is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div>
+                <button 
+                    class="button-default"
+                    type="submit" 
+                    [disabled]="!formValid || !this.formGroup.touched || !this.formGroup.dirty"
+                >
+                    Edit
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
