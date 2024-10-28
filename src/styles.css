@@ -1,0 +1,233 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
+
+body {
+    padding: 0px;
+    margin: 0px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+table, th, td {
+    border: 1px solid gainsboro;
+    border-collapse: collapse;
+}
+
+
+button {
+    background-color: white;
+}
+
+
+.table-default {
+    margin:auto;
+    text-align: center;
+}
+
+.button-default {
+    border:2px solid gainsboro;
+    padding:3px;
+    border-radius: 5px;
+    color:black;
+}
+.button-default:hover:enabled {
+    color:white;
+    background-color: #00bfff;
+    cursor: pointer;
+}
+
+.button-danger {
+    border:2px solid gainsboro;
+    padding:3px;
+    border-radius: 5px;
+    color:black;
+}
+.button-danger:hover:enabled {
+    color:white;
+    background-color: #ff0000;
+    cursor: pointer;
+}
+
+
+
+
+
+/* forms */
+input.ng-pending {
+    border-bottom:1px solid yellow;
+}
+
+input.ng-invalid.ng-touched {
+    border-bottom:1px solid red;
+}
+
+select.ng-invalid.ng-touched {
+    border-bottom:1px solid red;
+}
+
+
+textarea {
+    min-height: 2em;
+}
+
+
+
+
+@media only screen and (max-width: 1024px) {
+    input, textarea, select {
+    }
+}
+
+input, textarea, select {
+}
+
+textarea {
+    outline: none;
+    border:none;
+    border-bottom: 1px solid gainsboro;
+    height:fit-content;
+}
+textarea:focus {
+    border-bottom: 1px solid rgb(19, 75, 180);
+}
+
+input[type="file"] {
+    border:none;
+}
+input {
+    outline: none;
+    border: none; 
+    border-bottom: 1px solid gainsboro;
+}
+input:focus {
+    border-bottom: 1px solid rgb(19, 75, 180);
+}
+
+select {
+    outline: none;
+    border: none; 
+    border-bottom: 1px solid gainsboro;
+    background-color: white;
+}
+select:focus {
+    border-bottom: 1px solid rgb(19, 75, 180);
+}
+option {
+    /* color:red;
+    background-color: white; */
+}
+
+.required:after {
+    content:" *";
+    color: red;
+}
+
+
+
+
+.indent-small {
+    text-indent: 5px;
+}
+
+
+.form-controls,
+.readonly-form-controls {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.disabled {
+    background-color: gainsboro;
+    color: grey;
+    pointer-events: none;
+}
+input:disabled {
+    background-color: gainsboro;
+}
+
+.single-per-line {
+    flex: 1 1 100%;
+}
+
+.input-control,
+.readonly-control {
+    text-align: center;
+    margin:5px;
+    font-weight: bold;
+}
+
+.image-control {
+    text-align: center;
+    margin: 10px 50px;
+}
+
+.image-readonly-control {
+    background-color: cornflowerblue;
+    padding: 20px;
+}
+.image-readonly-control img {
+    border-radius: 10px;
+    width: 128px;
+    height: 128px;
+}
+
+.flex-justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+.entity-management-options {
+    padding:10px;
+    display:flex;
+    justify-content: center;
+}
+.entity-management-options button {
+    margin:5px;
+}
+
+
+
+/* TODO */
+/* .port-side {
+    max-width:initial;
+    width:initial;
+}
+
+.no-data {
+    font-weight:bold;
+    padding:50px;
+    display: flex;
+    font-style: italic;
+    justify-content: center;
+    border-style: solid;
+    border-color: gainsboro;
+    border-width: 0 1px 1px 1px;
+}
+.table-data {
+}
+
+.menu {
+    display:flex;
+    justify-content: space-between;
+}
+
+
+.content-container {
+    padding:50px;
+    border:1px solid gainsboro; 
+    text-align: center;
+}
+
+
+.header {
+    margin-top:10px;
+    border-bottom: 1px solid gainsboro;
+    width:fit-content;
+}
