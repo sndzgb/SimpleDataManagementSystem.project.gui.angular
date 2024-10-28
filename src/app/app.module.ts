@@ -6,21 +6,15 @@ import { AppRoutingModule, RoutableComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './components/users/users/users.component';
 import { CreateUserComponent } from './components/users/create/create.component';
-import { ItemComponent } from './components/items/item/item.component';
 import { ItemsComponent } from './components/items/items/items.component';
 import { CreateItemComponent } from './components/items/create/create.component';
 import { DeleteUserComponent } from './components/users/delete/delete.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { MessagesComponent } from './components/messages/messages/messages.component';
-import { EditComponent } from './components/messages/edit/edit.component';
 import { ItemDetailsComponent } from './components/items/details/details.component';
-import { MessageComponent } from './components/messages/message/message.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { CreateMessageComponent } from './components/messages/create/create.component';
 import { RouterModule } from '@angular/router';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { ToastComponent } from './components/toast/toast.component';
@@ -29,12 +23,10 @@ import { HttpResponseRefreshAuthorizationHeaderInterceptor } from './interceptor
 import { GlobalErrorHandler } from './error-handling/global-error-handler';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumbersOnlyDirective } from './directives/numbers-only.directive';
-import { FormGroupValidationErrorsUserFriendlyDisplayDirective } from './directives/form-group-validation-errors-user-friendly-display.directive';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/account/login/login.component';
 import { AppConfigurationService } from './services/app-configuration.service';
 import { ColorGeneratorPipe } from './pipes/color-generator.pipe';
-import { WatchlistDirective } from './directives/watchlist.directive';
 import { LogoutComponent } from './components/account/logout/logout.component';
 import { EditItemComponent } from './components/items/edit/edit.component';
 import { PagerComponent } from './components/pager/pager.component';
@@ -59,7 +51,6 @@ import { DeleteRetailerComponent } from './components/retailers/delete/delete.co
 import { RetailerDetailsComponent } from './components/retailers/details/details.component';
 import { EditRetailerComponent } from './components/retailers/edit/edit.component';
 import { IntegerOnlyDirective } from './directives/integer-only.directive';
-import { DisabledControlDirective } from './directives/disabled-control.directive';
 import { HttpErrorsDisplayComponent } from './components/http-errors-display/http-errors-display.component';
 import { FormRequiredFieldsMessageComponent } from './components/form-required-fields-message/form-required-fields-message.component';
 import { EmbeddedFormComponent } from './components/base/embedded-form/embedded-form.component';
@@ -71,28 +62,20 @@ import { UserDetailsComponent } from './components/users/details/details.compone
     UsersComponent,
     CreateUserComponent,
     CreateItemComponent,
-    ItemComponent,
     ItemsComponent,
     DeleteUserComponent,
-    DashboardComponent,
-    MessagesComponent,
-    EditComponent,
     ToastComponent, // non-routable
     ItemDetailsComponent,
-    MessageComponent, // non-routable
     NavbarComponent, // non-routable
     PageNotFoundComponent,
     HomeComponent,
     FooterComponent, // non-routable
     SpinnerComponent, // non-routable
-    CreateMessageComponent, // non-routable
     UnauthorizedComponent, 
     ToastComponent,
     NumbersOnlyDirective,
-    FormGroupValidationErrorsUserFriendlyDisplayDirective, 
     LoginComponent,
     ColorGeneratorPipe,
-    WatchlistDirective,
     LogoutComponent,
     EditItemComponent,
     PagerComponent,
@@ -117,7 +100,6 @@ import { UserDetailsComponent } from './components/users/details/details.compone
     EditRetailerComponent,
     HttpErrorsDisplayComponent,
     IntegerOnlyDirective,
-    DisabledControlDirective,
     FormRequiredFieldsMessageComponent,
     EmbeddedFormComponent,
     UserDetailsComponent,

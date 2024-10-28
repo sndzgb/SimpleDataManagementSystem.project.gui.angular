@@ -7,7 +7,6 @@ import { HomeComponent } from './components/home/home.component';
 import { CreateItemComponent } from './components/items/create/create.component';
 import { Roles } from './constants/roles';
 import { isInRoleGuard } from './route-guards/is-in-role.guard';
-import { ItemComponent } from './components/items/item/item.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { EditItemComponent } from './components/items/edit/edit.component';
 import { DeleteItemComponent } from './components/items/delete/delete.component';
