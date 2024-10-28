@@ -1,0 +1,150 @@
+<div class="header" *ngLoading="user">
+    <h1>User details - '<b>{{user?.username}}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <br>
+
+    <div class="readonly-form-controls-container">
+        <div class="readonly-form-controls">
+
+            <div class="readonly-control single-per-line">
+                <div>
+                    <label>User ID:</label>
+                </div>
+                <div>
+                    <em>
+                        <label>{{user?.id}}</label>
+                    </em>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="readonly-control single-per-line">
+                <div>
+                    <label>Password change required:</label>
+                </div>
+                <div>
+                    <em>
+                        <label>{{user?.isPasswordChangeRequired}}</label>
+                    </em>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="readonly-control single-per-line">
+                <div>
+                    <label>Role ID:</label>
+                </div>
+                <div>
+                    <em>
+                        <label>{{user?.roleId}}</label>
+                    </em>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="readonly-control single-per-line">
+                <div>
+                    <label>Role name:</label>
+                </div>
+                <div>
+                    <em>
+                        <label>{{user?.roleName}}</label>
+                    </em>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="readonly-control single-per-line">
+                <div>
+                    <label>Username:</label>
+                </div>
+                <div>
+                    <em>
+                        <label>{{user?.username}}</label>
+                    </em>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="flex-justify-center">
+            <div class="entity-management-options">
+                <a 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsInRole], 
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                            ).toString()
+                        ]
+                    }"
+                    [routerLink]="['/users', userId, 'edit']">
+                    <button class="button-default">
+                        Edit
+                    </button>
+                </a>
+                <a 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsInRole], 
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                            ).toString()
+                        ]
+                    }"
+                    [routerLink]="['/users', userId, 'delete']">
+                    <button class="button-danger">
+                        Delete
+                    </button>
+                </a>
+                <a 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsResourceOwner],
+                        values: [
+                            (
+                                this.authService.getAuthenticationItemValueByKey(authenticationItems.UserId)
+                                ==
+                                this.userId?.toString()
+                            ).toString()
+                        ]
+                    }"
+                [routerLink]="['/account']">
+                    <button class="button-danger">
+                        Account
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
