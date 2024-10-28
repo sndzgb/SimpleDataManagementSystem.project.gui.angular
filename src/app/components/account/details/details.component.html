@@ -1,0 +1,42 @@
+<div class="header" *ngLoading="account">
+    <h1>Account details - <b>'{{ account?.username }}'</b></h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <go-back></go-back>
+</div>
+
+<br>
+
+<div *ngLoading="account" class="content-container">
+
+        <div class="readonly-form-controls-container">
+            <div class="readonly-form-controls">
+                
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>Change password:</label>
+                    </div>
+                </div>
+
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <a [routerLink]="'/account/password-change'">
+                            <button
+                                [ngStyle]="{'background-color': account?.isPasswordChangeRequired ? 'red' : 'white', 
+                                'color': account?.isPasswordChangeRequired ? 'white' : 'black'}"
+                            >
+                                <!-- <password-change></password-change> -->
+                                Change
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+
+</div>
