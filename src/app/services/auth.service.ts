@@ -109,6 +109,7 @@ export class AuthService {
         throw new Error("Enum not implemented. Type: " + typeof(Roles));
       }
     }
+  }
 
   isAuthenticated(): boolean {
 
@@ -121,3 +122,5 @@ export class AuthService {
     
     const decodedToken = jwtDecode<Jwt>(token);
     return decodedToken.exp! > Date.now() / 1000;
+  }
+}

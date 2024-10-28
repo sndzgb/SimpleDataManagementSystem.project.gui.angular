@@ -74,6 +74,8 @@ export class ItemsService {
       formData,
       { headers: headers }
     );
+    return response;
+  }
 
   deleteItem(itemId: string): Observable<Object> {
     let response = this.httpClient.delete(this.appConfigurationService.webApiBaseUrl + `/api/items/` + itemId);

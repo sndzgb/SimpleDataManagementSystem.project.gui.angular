@@ -24,6 +24,8 @@ export class AppComponent implements OnInit, OnDestroy {
   onToastVisibilityToggled(visible: boolean): void {
     console.log("visibility toggled: " + visible);
     this.toastVisible = visible;
+  }
+
   constructor(public toastService: ToastService) {
     
     this.toastVisible = false;
