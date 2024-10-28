@@ -1,0 +1,17 @@
+.danger {
+    color: white;
+    /* background-color: #ff0000; */
+    background-color: #ff4c4c;
+}
+.success {
+    color: white;
+    background-color: #00ff00;
+}
+.warning {
+    color: white;
+    background-color: #ff8000;
+}
+.default {
+    color: black;
+    background-color: white;
+}
