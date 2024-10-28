@@ -1,0 +1,74 @@
+<div class="header" *ngLoading="retailer">
+    <h1>Delete retailer - '<b>{{retailer?.name}}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <br>
+    
+    <form 
+        *ngIf="retailer != undefined && retailer != null"
+        method="post"
+        (ngSubmit)="onDeleteRetailerClicked()"
+    >
+        <div class="readonly-form-controls-container">
+            <div class="readonly-form-controls">
+                
+                <div class="port-side">
+                    <div class="readonly-control">
+                        <div>
+                            <label>Name:</label>
+                        </div>
+                        <div>
+                            <em>
+                                <label>{{retailer.name}}</label>
+                            </em>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="readonly-control">
+                        <div>
+                            <label>Priority:</label>
+                        </div>
+                        <div>
+                            <em>
+                                <label>{{retailer.priority}}</label>
+                            </em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="starboard-side">
+                    <div class="image-readonly-control">
+                        <img [attr.src]="retailer.logoImageUri ? retailer.logoImageUri : '/assets/resources/image_not_available.png'" />
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="flex-justify-center">
+                <button class="button-danger" type="submit">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
