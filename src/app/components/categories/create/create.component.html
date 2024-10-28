@@ -1,0 +1,76 @@
+<div class="header">
+    <h1>Create new category</h1>
+</div>
+
+<br>
+
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+    
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <form-required-fields-message></form-required-fields-message>
+
+    <br>
+
+    <form method="post" [formGroup]="formGroup" (ngSubmit)="onCreateCategoryFormSubmitted()">
+        <div class="form-controls-container">
+            <div class="form-controls">
+                
+                <div class="input-control single-per-line">
+                    <div class="required">
+                        <label>Name</label>
+                    </div>
+                    <div>
+                        <input formControlName="name" type="text" />
+                    </div>
+                    <div>
+                        <small *ngIf="this.formGroup.get('name')?.errors?.['required'] 
+                                && this.formGroup.get('name')?.touched">
+                            Name is required.
+                        </small>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="input-control single-per-line">
+                    <div class="required">
+                        <label>Priority</label>
+                    </div>
+                    <div>
+                        <input numbersOnly formControlName="priority" type="number" />
+                    </div>
+                    <div>
+                        <small *ngIf="this.formGroup.get('priority')?.errors?.['required'] 
+                                && this.formGroup.get('priority')?.touched">
+                            Priority is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            
+            <br>
+
+            <div class="flex-justify-center">
+                <button class="button-default" type="submit" 
+                    [disabled]="!formValid || !this.formGroup.dirty || !this.formGroup.touched"
+                >
+                    Create
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
