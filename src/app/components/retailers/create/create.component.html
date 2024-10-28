@@ -1,0 +1,112 @@
+<div class="header">
+    <h1>Create new retailer</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+
+<div class="content-container">
+    
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <form-required-fields-message></form-required-fields-message>
+
+    <br>
+
+    <form method="post" (ngSubmit)="onCreateRetailerFormSubmitted()" [formGroup]="formGroup">
+        <div class="form-controls-container">
+            <div class="form-controls">
+                <div class="port-side">
+                    <div class="input-control">
+                        <div class="required">
+                            <label>Name:</label>
+                        </div>
+                        <div>
+                            <input type="text" formControlName="name" />
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('name')?.errors?.['required'] 
+                                && this.formGroup.get('name')?.touched"
+                            >
+                                Name is required.
+                            </small>
+                            <small *ngIf="this.formGroup.get('name')?.errors?.['maxlength'] 
+                                && this.formGroup.get('name')?.touched"
+                            >
+                                Name exceeds maximum number of
+                                    {{formGroup.get('name')?.errors?.['maxlength'].requiredLength}} 
+                                allowed characters.
+                            </small>
+                            <small *ngIf="this.formGroup.get('name')?.errors?.['minlength'] 
+                                && this.formGroup.get('name')?.touched"
+                            >
+                                Name must contain at least 
+                                    {{formGroup.get('name')?.errors?.['minlength'].requiredLength}} 
+                                characters.
+                            </small>
+                        </div>
+                    </div>
+    
+                    <br>
+
+                    <div class="input-control">
+                        <div class="required">
+                            <label>Priority:</label>
+                        </div>
+                        <div>
+                            <input type="number" integerOnly formControlName="priority" />
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('priority')?.errors?.['required'] 
+                                && this.formGroup.get('priority')?.touched"
+                            >
+                                Priority is required.
+                            </small>
+                            <small *ngIf="this.formGroup.get('priority')?.errors?.['min'] 
+                                && this.formGroup.get('priority')?.touched"
+                            >
+                                Priority minimal value is not valid.
+                            </small>
+                            <small *ngIf="this.formGroup.get('priority')?.errors?.['max'] 
+                                && this.formGroup.get('priority')?.touched"
+                            >
+                                Priority maximal value is not valid.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-control starboard-side">
+                    <file-upload
+                        [maxSize]="0.5 * 1024 * 1024"
+                        [form]="formGroup"
+                        [fileControlName]="'logoImage'"
+                    >
+                    </file-upload>
+                </div>
+
+            </div>
+
+            <br>
+            
+            <div class="flex-justify-center">
+                <button class="button-default" type="submit" 
+                    [disabled]="!formValid || !this.formGroup.dirty || !this.formGroup.touched"
+                >
+                    Create
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
