@@ -1,0 +1,55 @@
+<div class="header">
+    <h1>Login</h1>
+</div>
+
+<br>
+
+<div class="content-container">
+    
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <form-required-fields-message></form-required-fields-message>
+
+    <br>
+
+    <form method="post" [formGroup]="formGroup" (ngSubmit)="onLoginFormSubmitted()">
+        <div class="form-controls-container">
+            <div class="form-controls">
+                <div class="input-control single-per-line">
+                    <div class="required">
+                        <label>Username:</label>
+                    </div>
+                    <div>
+                        <input type="text" formControlName="username" />
+                    </div>
+                    <div *ngIf="this.formGroup.get('username')?.errors?.['required'] && this.formGroup.get('username')?.touched">
+                        <small>
+                            Username is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="input-control single-per-line">
+                    <div class="required">
+                        <label>Password:</label>
+                    </div>
+                    <div>
+                        <input type="password" formControlName="password" />
+                    </div>
+                    <div *ngIf="this.formGroup.get('password')?.errors?.['required'] && this.formGroup.get('password')?.touched">
+                        <small>
+                            Password is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="input-control single-per-line">
+                    <div>
+                        <button class="button-default" type="submit" [disabled]="!formValid">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
