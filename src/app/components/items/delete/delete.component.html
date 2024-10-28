@@ -1,0 +1,124 @@
+<div class="header" *ngLoading="item">
+    <h1>Delete item - '<b>{{ item?.nazivproizvoda }}</b>'</h1>
+</div>
+
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <br>
+    
+    <form 
+        *ngIf="item != undefined && item != null"
+        method="post" 
+        (ngSubmit)="onDeleteItemClicked()"
+    >
+        <div class="readonly-form-controls-container">
+            <div class="readonly-form-controls">
+                
+                <div class="port-side">
+                    <div class="readonly-control single-per-line">
+                        <div>
+                            <label>Naziv proizvoda:</label>
+                        </div>
+                        <div>
+                            <em>
+                                <label>{{item.nazivproizvoda}}</label>
+                            </em>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="readonly-control single-per-line">
+                        <div>
+                            <label>Opis:</label>
+                        </div>
+                        <div>
+                            <em>
+                                <label>{{item.opis}}</label>
+                            </em>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="readonly-control single-per-line">
+                        <div>
+                            <label>Cijena:</label>
+                        </div>
+                        <div>
+                            <em>
+                                <label>{{item.cijena}}</label>
+                            </em>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="readonly-control single-per-line">
+                        <div>
+                            <label>Datum akcije:</label>
+                        </div>
+                        <div>
+                            <em>
+                                <label>{{item.datumakcije}}</label>
+                            </em>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="readonly-control single-per-line">
+                        <div>
+                            <label>Kategorija:</label>
+                        </div>
+                        <div>
+                            <em>
+                                <label>{{item.kategorija}}</label>
+                            </em>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="starboard-side">
+                    <div 
+                        class="image-readonly-control"
+                        [ngSwitch]="item.URLdoslikeUri == null"
+                    >
+                        <img *ngSwitchCase="false" 
+                            [src]="item.URLdoslikeUri" 
+                        />
+                        <img *ngSwitchCase="true" 
+                            [attr.src]="'/assets/resources/image_not_available.png'" 
+                            alt="no image available"
+                        />
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="flex-justify-center">
+                <button class="button-danger" type="submit">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
