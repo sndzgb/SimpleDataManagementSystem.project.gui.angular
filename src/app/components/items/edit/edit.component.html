@@ -1,0 +1,186 @@
+<div class="header" *ngLoading="item">
+    <h1>Edit item - '<b>{{ item?.nazivproizvoda }}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+
+
+<div class="content-container">
+    
+    <http-errors-display [errors]="errors"></http-errors-display>
+    
+    <form-required-fields-message></form-required-fields-message>
+
+    <br>
+
+    <form 
+        *ngIf="item != undefined && item != null"
+        method="post" 
+        [formGroup]="formGroup" 
+        (ngSubmit)="onEditItemFormSubmitted()"
+    >
+        <div class="form-controls-container">
+            <div class="form-controls">
+
+                <div class="port-side">
+                    <div class="input-control single-per-line">
+                        <div>
+                            <label for="opis">Opis:</label>
+                        </div>
+                        <div>
+                            <textarea 
+                                formControlName="opis" 
+                                style="display:block;" 
+                                type="text" 
+                                id="opis" 
+                                spellcheck="false">
+                            </textarea>
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('opis')?.errors?.['maxlength'] 
+                                    && this.formGroup.get('opis')?.touched">
+                                Naziv proizvoda exceeds maximum character length.
+                            </small>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="input-control single-per-line">
+                        <div>
+                            <label for="datumakcije">Datum akcije:</label>
+                        </div>
+                        <div>
+                            <input formControlName="datumakcije" type="text" id="datumakcije" />
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('datumakcije')?.errors?.['maxlength'] 
+                                    && this.formGroup.get('datumakcije')?.touched">
+                                Datum akcije exceeds maximum number of allowed characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="input-control single-per-line">
+                        <div class="required">
+                                <label for="cijena">Cijena:</label>
+                        </div>
+                        <div>
+                            <input numbersOnly formControlName="cijena" type="number" id="cijena" />
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('cijena')?.errors?.['required'] 
+                                    && this.formGroup.get('cijena')?.touched">
+                                Cijena is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="input-control single-per-line">
+                        <div class="required">
+                            <label for="retailer">Retailer:</label>
+                        </div>
+                        <div>
+                            <select *ngLoading="retailers" id="retailer" formControlName="retailerId">
+                                <option *ngFor="let r of retailers?.retailers" [value]="r.id">{{ r.name }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('retailerId')?.errors?.['required'] 
+                                    && this.formGroup.get('retailerId')?.touched">
+                                Retailer is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="input-control single-per-line">
+                        <div class="required">
+                            <label for="kategorija">Category:</label>
+                        </div>
+                        <div>
+                            <select *ngLoading="categories" id="kategorija" formControlName="kategorija">
+                                <option *ngFor="let c of categories?.categories" [value]="c.id">{{ c.name }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('kategorija')?.errors?.['required'] 
+                                    && this.formGroup.get('kategorija')?.touched">
+                                Category is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="starboard-side">
+                    <div class="image-control">
+                        <div *ngIf="item?.URLdoslikeUri">
+                            <div>
+                                <label>Thumbnail:</label>
+                            </div>
+                            <div style="position: relative; width:fit-content; margin: auto;">
+                                <img width="300" height="300" [attr.src]="item.URLdoslikeUri" />
+                                <button type="button" 
+                                    style="
+                                        position:absolute; 
+                                        top:5px; 
+                                        right: 5px; 
+                                        border:none;
+                                        cursor:default;
+                                        background-color: transparent;
+                                        background-repeat: no-repeat;
+                                        border: none;
+                                        overflow: hidden;
+                                        outline: none;"
+                                >
+                                    <i 
+                                        (click)="onRemoveProductImageClicked(item!)"
+                                        style="cursor: pointer;"
+                                        class="fa-solid fa-circle-xmark fa-lg"
+                                    >
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
+                        <div *ngIf="!item.URLdoslikeUri">
+                            <file-upload
+                                [maxSize]="0.5 * 1024 * 1024"
+                                [form]="formGroup"
+                                [fileControlName]="'URLdoslike'"
+                            >
+                            </file-upload>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="flex-justify-center">
+                <button class="button-default" type="submit" 
+                    [disabled]="!formValid || !this.formGroup.dirty || !this.formGroup.touched"
+                >
+                    Edit
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
