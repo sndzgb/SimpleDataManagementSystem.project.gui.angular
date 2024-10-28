@@ -1,0 +1,124 @@
+<div class="header">
+    <h1>Retailers</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <a
+        *ngVisibleIfHasPermissions="{ 
+            permissions: [appPermissions.IsInRole], 
+            values: [
+                (
+                    (
+                        this.roles.Admin.toString() 
+                        ==
+                        this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                    )
+                    ||
+                    (
+                        this.roles.Employee.toString()
+                        ==
+                        this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                    )
+                ).toString()
+            ]
+        }"
+            [routerLink]="['/retailers/create']"
+        >
+            <button class="button-default" type="button">
+                Create
+            </button>
+        </a>
+    </div>
+</div>
+
+
+<br>
+
+<div class="table-default">
+    <table style="table-layout: fixed; width: 100%;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Priority</th>
+                <th>Logo</th>
+                <th 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsInRole], 
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                                ||
+                                (
+                                    this.roles.Employee.toString()
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                            ).toString()
+                        ]
+                    }"
+                >
+                    Management
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="max-height: 70px; height:70px;" *ngFor="let r of retailers?.retailers">
+                <td>{{ r.id }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.priority }}</td>
+                <td><img height="64" width="64" [attr.src]="r.logoImageUri ? r.logoImageUri : '/assets/resources/image_not_available.png'" /></td>
+                <td 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsInRole], 
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                                ||
+                                (
+                                    this.roles.Employee.toString()
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                            ).toString()
+                        ]
+                    }"
+                    class="options"
+                >
+                    <a [routerLink]="['/retailers', r.id, 'details']">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                    <a [routerLink]="['/retailers', r.id, 'edit']">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                    <a [routerLink]="['/retailers', r.id, 'delete']">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="no-data" *ngIf="retailers?.retailers?.length == 0">
+        No data to show.
+    </div>
+
+    <spinner *ngIf="!retailers"></spinner>
+</div>
+
+<pager *ngLoading="retailers" [pageInfo]="retailers?.pageInfo!"></pager>
