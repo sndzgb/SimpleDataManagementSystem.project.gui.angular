@@ -1,0 +1,84 @@
+<div class="container" style="margin-top: 10px; margin-bottom:10px;">
+    <a [routerLink]="['/']" class="logo navbarItem"><img src="/favicon.ico" alt="logo" /></a>
+
+    <div class="hamb">
+        <button (click)="onHambToggle()">
+            <span>&equiv;</span>
+        </button>
+    </div>
+
+    <div 
+        *ngVisibleIfHasPermissions="{ 
+            permissions: [appPermissions.IsAuthenticated], 
+            values: [
+                (
+                    (
+                        this.authService.isAuthenticated()
+                    )
+                ).toString()
+            ]
+        }"
+        class="links" [ngClass]="isCollapsed ? '' : 'collapsed'">
+        <a [routerLink]="['/items']" 
+            [routerLinkActive]="'active'" 
+            class="navbarItem"
+            *ngVisibleIfHasPermissions="{ 
+                permissions: [appPermissions.IsInRole], 
+                values: [
+                    (
+                        (
+                            this.roles.Admin.toString() 
+                            ==
+                            this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                        )
+                        ||
+                        (
+                            this.roles.Employee.toString() 
+                            ==
+                            this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                        )
+                    ).toString()
+                ]
+            }"
+        >
+            Items
+        </a>
+        <a [routerLink]="['/categories']" [routerLinkActive]="'active'" class="navbarItem">Categories</a>
+        <a [routerLink]="['/retailers']" [routerLinkActive]="'active'" class="navbarItem">Retailers</a>
+        <a [routerLink]="['/users']"
+            [routerLinkActive]="'active'" 
+            class="navbarItem"
+            *ngVisibleIfHasPermissions="{ 
+                permissions: [appPermissions.HasRoleAdmin], 
+                values: [
+                    (this.roles.Admin.toString() 
+                        ==
+                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)).toString()
+                ]
+            }"
+        >
+            Users
+        </a>
+        <a [routerLink]="['/account']" [routerLinkActive]="'active'" class="navbarItem">Account</a>
+            <logout 
+                *ngVisibleIfHasPermissions="{ 
+                    permissions: [appPermissions.IsAuthenticated], 
+                    values: [authenticated.toString()] 
+                }"
+                class="logout"
+            >
+            </logout>
+
+            <a 
+                *ngVisibleIfHasPermissions="{ 
+                    permissions: [appPermissions.IsAnonymous], 
+                    values: [(!authenticated).toString()] 
+                }"
+                class="login" 
+                [routerLink]="['/account/login']"
+            >
+                Login
+            </a>
+    </div>
+
+</div>
