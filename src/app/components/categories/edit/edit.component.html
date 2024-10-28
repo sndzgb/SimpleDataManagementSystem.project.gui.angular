@@ -1,0 +1,82 @@
+<div class="header" *ngLoading="category">
+    <h1>Edit category - '<b>{{ category?.name }}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+    
+    <http-errors-display [errors]="errors"></http-errors-display>
+    
+    <form-required-fields-message></form-required-fields-message>
+
+    <br>
+
+    <form 
+        *ngIf="category != undefined && category != null"
+        method="post" 
+        [formGroup]="formGroup" 
+        (ngSubmit)="onEditCategoryFormSubmitted()"
+    >
+        <div class="form-controls-container">
+            <div class="form-controls">
+                
+                <div class="input-control single-per-line">
+                    <div class="required">
+                        <label>Name:</label>
+                    </div>
+                    <div>
+                        <input type="text" formControlName="name" />
+                    </div>
+                    <div>
+                        <small *ngIf="this.formGroup.get('name')?.errors?.['required'] 
+                                && this.formGroup.get('name')?.touched">
+                            Name is required.
+                        </small>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="input-control">
+                    <div class="required">
+                        <label>Priority:</label>
+                    </div>
+                    <div>
+                        <input type="number" numbersOnly formControlName="priority" />
+                    </div>
+                    <div>
+                        <small *ngIf="this.formGroup.get('priority')?.errors?.['required'] 
+                                && this.formGroup.get('priority')?.touched">
+                            Priority is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div>
+                <button 
+                    class="button-default"
+                    type="submit" 
+                    [disabled]="!formValid || !this.formGroup.touched || !this.formGroup.dirty"
+                >
+                    Edit
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+

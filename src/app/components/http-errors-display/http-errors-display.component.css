@@ -1,0 +1,8 @@
+.error-display-window {
+    background-color: #ff4c4c;
+    color:white;
+    padding:20px 120px;
+    width:fit-content;
+    margin: auto;
+    border-radius: 5px;
+}

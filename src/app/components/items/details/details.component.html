@@ -1,0 +1,165 @@
+<div class="header" *ngLoading="item">
+    <h1>Item details - '<b>{{item?.nazivproizvoda}}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <br>
+
+    <div class="readonly-form-controls-container">
+        <div class="readonly-form-controls">
+            
+            <div class="port-side">
+
+                <div class="readonly-control">
+                    <div>
+                        <label>Naziv proizvoda:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{item?.nazivproizvoda}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control">
+                    <div>
+                        <label>Cijena:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{item?.cijena}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control">
+                    <div>
+                        <label>Datum akcije:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{item?.datumakcije}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control">
+                    <div>
+                        <label>Kategorija:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{item?.kategorija}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control">
+                    <div>
+                        <label>Naziv retailera:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{item?.nazivretailera}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control">
+                    <div>
+                        <label>Retailer ID:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{item?.retailerId}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control">
+                    <div>
+                        <label>Opis:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{item?.opis}}</label>
+                        </em>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="starboard-side">
+                <div class="image-readonly-control">
+                    <img [attr.src]="item?.URLdoslikeUri ? item?.URLdoslikeUri: '/assets/resources/image_not_available.png'" />
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="flex-justify-center">
+            <div 
+                *ngVisibleIfHasPermissions="{ 
+                    permissions: [appPermissions.IsInRole], 
+                    values: [
+                        (
+                            (
+                                this.roles.Admin.toString() 
+                                ==
+                                this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                            )
+                            ||
+                            (
+                                this.roles.Employee.toString()
+                                ==
+                                this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                            )
+                        ).toString()
+                    ]
+                }" 
+                class="entity-management-options"
+            >
+                <a [routerLink]="['/items', nazivproizvoda, 'edit']">
+                    <button class="button-default">
+                        Edit
+                    </button>
+                </a>
+                <a [routerLink]="['/items', nazivproizvoda, 'delete']">
+                    <button class="button-danger">
+                        Delete
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

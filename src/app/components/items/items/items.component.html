@@ -1,0 +1,148 @@
+<div class="header">
+    <h1>Items</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <a
+            *ngVisibleIfHasPermissions="{ 
+                permissions: [appPermissions.IsInRole], 
+                values: [
+                    (
+                        (
+                            this.roles.Admin.toString() 
+                            ==
+                            this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                        )
+                        ||
+                        (
+                            this.roles.Employee.toString() 
+                            ==
+                            this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                        )
+                    ).toString()
+                ]
+            }" 
+            [routerLink]="['/items/create']"
+        >
+            <button class="button-default" type="button">
+                Create
+            </button>
+        </a>
+    </div>
+
+    <div class="spacer">
+    </div>
+
+    <div>
+        <input style="outline: none; flex-grow: 2; border: none; border-bottom: 1px solid gainsboro;" />
+        <button type="button" style="border: none; border-bottom: 1px solid gainsboro; background-color: white;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+</div>
+
+
+<br />
+
+<div class="table-default">
+    <table style="table-layout: fixed; width: 100%;">
+        <thead>
+            <tr>
+                <th>Naziv proizvoda</th>
+                <th>Opis</th>
+                <th>Datum akcije</th>
+                <th>Cijena</th>
+                <th>Kategorija</th>
+                <th>Thumbnail</th>
+                <th 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsInRole], 
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                                ||
+                                (
+                                    this.roles.Employee.toString()
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                            ).toString()
+                        ]
+                    }"
+                >
+                    Management
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="max-height: 70px; height:70px;" *ngFor="let item of items?.items">
+                <td [ngStyle]="item.nazivproizvoda! | colorGenerator">{{ item.nazivproizvoda }}</td>
+                <td>{{ item.opis }}</td>
+                <td>{{ item.datumakcije }}</td>
+                <td>{{ item.cijena }}</td>
+                <td [ngClass]="item.kategorija == 1 ? 'kategorija1' : 'nema'">{{ item.kategorija }}</td>
+
+                <td>
+                    <img 
+                        width="64"
+                        height="64" 
+                        [attr.src]="item?.URLdoslikeUri ? item.URLdoslikeUri : '/assets/resources/image_not_available.png'" 
+                    />
+                </td>
+
+                <td 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsInRole], 
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                                ||
+                                (
+                                    this.roles.Employee.toString()
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                            ).toString()
+                        ]
+                    }"
+                    class="options"
+                >
+                    <a [routerLink]="['/items', item.nazivproizvoda, 'details']">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                        <a [routerLink]="['/items', item.nazivproizvoda, 'edit']">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                        <a [routerLink]="['/items', item.nazivproizvoda, 'delete']">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="no-data" *ngIf="items?.items?.length == 0">
+        No data to show.
+    </div>
+
+    <spinner *ngIf="!items"></spinner>
+
+</div>
+
+    <pager *ngLoading="items" [pageInfo]="items?.pageInfo!"></pager>

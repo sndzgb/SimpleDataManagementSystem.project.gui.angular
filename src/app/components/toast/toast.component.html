@@ -1,0 +1,19 @@
+
+<div
+    [ngClass]="getToastCssClass(this.toast?.type)"
+    style="
+    display:flex; 
+    text-align: center; 
+    border:1px solid black; 
+    min-width: 250px; 
+    max-width: 500px; 
+    width:fit-content; 
+    margin:auto;
+    padding:5px;
+">
+    <label style="flex:1;">{{ message }}</label>
+    <span (click)="hideToast()" style="width:20px; align-self: center; margin:0px 10px; cursor:pointer;">
+        <i class="fa-solid fa-circle-xmark"></i>
+    </span>
+</div>
+

@@ -1,0 +1,129 @@
+<div class="header" *ngLoading="user">
+    <h1>Delete user - '<b>{{ user?.username }}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <br>
+    
+    <form
+        *ngIf="user != undefined && user != null"
+        method="post" 
+        (ngSubmit)="onDeleteUserClicked()"
+    >
+        <div class="readonly-form-controls-container">
+            <div class="readonly-form-controls">
+                
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>User ID:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{user.id}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>Username:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{user.username}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>Role ID:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{user.roleId}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>Role name:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{user.roleName}}</label>
+                        </em>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="flex-justify-center">
+                <div 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.Custom],
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                                ||
+                                (
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.UserId)
+                                    ==
+                                    this.userId?.toString()
+                                )
+                            ).toString()
+                        ]
+                    }">
+                    <button class="button-danger" type="submit">
+                        Delete
+                    </button>
+                </div>
+                
+                <div
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsResourceOwner],
+                        values: [
+                            (
+                                this.authService.getAuthenticationItemValueByKey(authenticationItems.UserId)
+                                ==
+                                this.userId?.toString()
+                            ).toString()
+                        ]
+                    }">
+                    <a [routerLink]="'/account/details'">
+                        <button class="button-default">
+                            Account
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

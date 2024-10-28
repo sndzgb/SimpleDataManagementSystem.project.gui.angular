@@ -1,0 +1,88 @@
+<div class="header" *ngLoading="category">
+    <h1>Category details - '<b>{{category?.name}}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <br>
+
+    <div class="readonly-form-controls-container">
+        <div class="readonly-form-controls">
+
+            <div class="readonly-control single-per-line">
+                <div>
+                    <label>Category ID:</label>
+                </div>
+                <div>
+                    <em>
+                        <label>{{category?.id}}</label>
+                    </em>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="readonly-control single-per-line">
+                <div>
+                    <label>Category name:</label>
+                </div>
+                <div>
+                    <em>
+                        <label>{{category?.name}}</label>
+                    </em>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="flex-justify-center">
+            <div 
+                *ngVisibleIfHasPermissions="{ 
+                    permissions: [appPermissions.IsInRole], 
+                    values: [
+                        (
+                            (
+                                this.roles.Admin.toString() 
+                                ==
+                                this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                            )
+                            ||
+                            (
+                                this.roles.Employee.toString()
+                                ==
+                                this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                            )
+                        ).toString()
+                    ]
+                }" 
+                class="entity-management-options"
+            >
+                <a [routerLink]="['/categories', categoryId, 'edit']">
+                    <button class="button-default">
+                        Edit
+                    </button>
+                </a>
+                <a [routerLink]="['/categories', categoryId, 'delete']">
+                    <button class="button-danger">
+                        Delete
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

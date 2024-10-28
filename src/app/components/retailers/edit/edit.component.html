@@ -1,0 +1,150 @@
+<div class="header" *ngLoading="retailer">
+    <h1>Edit retailer - '<b>{{retailer?.name}}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+
+<div class="content-container">
+
+    <http-errors-display [errors]="errors"></http-errors-display>
+    
+    <form-required-fields-message></form-required-fields-message>
+
+    <br>
+
+    <form
+        *ngIf="retailer != undefined && retailer != null"
+        method="post"
+        (ngSubmit)="onEditRetailerFormSubmitted()" 
+        [formGroup]="formGroup"
+    >
+        <div class="form-controls-container">
+            <div class="form-controls">
+                
+                <div class="port-side">
+                    <div class="input-control single-per-line">
+                        <div class="required">
+                            <label>Name:</label>
+                        </div>
+                        <div>
+                            <input type="text" formControlName="name" />
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('name')?.errors?.['required'] 
+                                && this.formGroup.get('name')?.touched"
+                            >
+                                Name is required.
+                            </small>
+                            <small *ngIf="this.formGroup.get('name')?.errors?.['maxlength'] 
+                                && this.formGroup.get('name')?.touched"
+                            >
+                                Name exceeds maximum number of
+                                    {{formGroup.get('name')?.errors?.['maxlength'].requiredLength}} 
+                                allowed characters.
+                            </small>
+                            <small *ngIf="this.formGroup.get('name')?.errors?.['minlength'] 
+                                && this.formGroup.get('name')?.touched"
+                            >
+                                Name must contain at least 
+                                    {{formGroup.get('name')?.errors?.['minlength'].requiredLength}} 
+                                characters.
+                            </small>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="input-control">
+                        <div class="required">
+                            <label>Priority:</label>
+                        </div>
+                        <div>
+                            <input type="number" integerOnly formControlName="priority" />
+                        </div>
+                        <div>
+                            <small *ngIf="this.formGroup.get('priority')?.errors?.['required'] 
+                                && this.formGroup.get('priority')?.touched"
+                            >
+                                Priority is required.
+                            </small>
+                            <small *ngIf="this.formGroup.get('priority')?.errors?.['min'] 
+                                && this.formGroup.get('priority')?.touched"
+                            >
+                                Priority minimal value is not valid.
+                            </small>
+                            <small *ngIf="this.formGroup.get('priority')?.errors?.['max'] 
+                                && this.formGroup.get('priority')?.touched"
+                            >
+                                Priority maximal value is not valid.
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="starboard-side single-per-line">
+                    <div class="image-control">
+                        <div *ngIf="retailer?.logoImageUri">
+                            <div>
+                                <label>Thumbnail:</label>
+                            </div>
+                            <div style="position: relative; width:fit-content; margin: auto;">
+                                <img width="300" height="300" [attr.src]="retailer.logoImageUri" />
+                                <button type="button" 
+                                    style="
+                                        position:absolute; 
+                                        top:5px; 
+                                        right: 5px; 
+                                        border:none;
+                                        cursor:default;
+                                        background-color: transparent;
+                                        background-repeat: no-repeat;
+                                        border: none;
+                                        overflow: hidden;
+                                        outline: none;"
+                                >
+                                    <i 
+                                        (click)="onRemoveRetailerImageClicked(retailer!)"
+                                        style="cursor: pointer;"
+                                        class="fa-solid fa-circle-xmark fa-lg"
+                                    >
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
+                        <div *ngIf="!retailer?.logoImageUri">
+                            <file-upload
+                                [maxSize]="0.5 * 1024 * 1024"
+                                [form]="formGroup"
+                                [fileControlName]="'logoImage'"
+                            >
+                            </file-upload>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="flex-justify-center">
+                <button class="button-default" type="submit" 
+                    [disabled]="!formValid || !this.formGroup.dirty || !this.formGroup.touched"
+                >
+                    Edit
+                </button>
+            </div>
+        </div>
+    </form>
+    
+</div>
+
