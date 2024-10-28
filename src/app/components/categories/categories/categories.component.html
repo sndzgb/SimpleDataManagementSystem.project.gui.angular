@@ -1,0 +1,130 @@
+<div class="header">
+    <h1>Categories</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <a
+            *ngVisibleIfHasPermissions="{ 
+                permissions: [appPermissions.IsInRole], 
+                values: [
+                    (
+                        (
+                            this.roles.Admin.toString() 
+                            ==
+                            this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                        )
+                        ||
+                        (
+                            this.roles.Employee.toString() 
+                            ==
+                            this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                        )
+                    ).toString()
+                ]
+            }" 
+            [routerLink]="['/categories/create']"
+        >
+            <button class="button-default" type="button">
+                Create
+            </button>
+        </a>
+    </div>
+
+    <div class="spacer">
+    </div>
+
+    <div>
+        <input style="outline: none; flex-grow: 2; border: none; border-bottom: 1px solid gainsboro;" />
+        <button type="button" style="border: none; border-bottom: 1px solid gainsboro; background-color: white;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+</div>
+
+
+<br>
+
+<div class="table-default">
+    <table style="table-layout: fixed; width: 100%;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsInRole], 
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                                ||
+                                (
+                                    this.roles.Employee.toString()
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                            ).toString()
+                        ]
+                    }"
+                >
+                    Management
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="max-height: 70px; height:70px;" *ngFor="let c of categories?.categories">
+                <td>{{ c.id }}</td>
+                <td>{{ c.name }}</td>
+                <td 
+                    *ngVisibleIfHasPermissions="{ 
+                        permissions: [appPermissions.IsInRole], 
+                        values: [
+                            (
+                                (
+                                    this.roles.Admin.toString() 
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                                ||
+                                (
+                                    this.roles.Employee.toString()
+                                    ==
+                                    this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                )
+                            ).toString()
+                        ]
+                    }"
+                    class="options"
+                >
+                    <a [routerLink]="['/categories', c.id, 'details']">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                    <a [routerLink]="['/categories', c.id, 'edit']">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                    <a [routerLink]="['/categories', c.id, 'delete']">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="no-data" *ngIf="categories?.categories?.length == 0">
+        No data to show.
+    </div>
+
+    <spinner *ngIf="!categories"></spinner>
+</div>
+
+<pager *ngLoading="categories" [pageInfo]="categories?.pageInfo!"></pager>
