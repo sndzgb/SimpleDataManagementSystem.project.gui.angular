@@ -1,0 +1,80 @@
+<div class="header" *ngLoading="category">
+    <h1>Delete category - '<b>{{ category?.name }}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="content-container">
+
+    <http-errors-display [errors]="errors"></http-errors-display>
+
+    <br>
+
+    <form 
+        *ngIf="category != undefined && category != null"
+        method="post" 
+        (ngSubmit)="onDeleteCategoryClicked()"
+    >
+        <div class="readonly-form-controls-container">
+            <div class="readonly-form-controls">
+
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>Category ID:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{category.id}}</label>
+                        </em>
+                    </div>
+                </div>
+                
+                <br>
+
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>Category name:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{category.name}}</label>
+                        </em>
+                    </div>
+                </div>
+
+                <div class="readonly-control single-per-line">
+                    <div>
+                        <label>Priority:</label>
+                    </div>
+                    <div>
+                        <em>
+                            <label>{{category.priority}}</label>
+                        </em>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="flex-justify-center">
+                <div>
+                    <button class="button-danger" type="submit">
+                        Delete
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
