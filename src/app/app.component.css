@@ -1,0 +1,8 @@
+toast {
+    position: relative;
+    margin:auto;
+}
+
+.adminCredentialsCloseIcon :hover {
+    cursor: pointer;
+}
