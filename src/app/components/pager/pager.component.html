@@ -1,0 +1,40 @@
+<div *ngIf="pager">
+        <div class="modelTablePagination">
+            <ul>
+                    <ng-container *ngIf="pager?.CurrentPage! > 1">
+                        <li>
+                            <a [routerLink]="[url]" [queryParams]="firstPage">
+                                First
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="[url]" [queryParams]="previousPage">
+                                Previous
+                            </a>
+                        </li>
+                    </ng-container>
+                    <li *ngFor="let page of middlePages; let i = index;">
+                        <a 
+                            [ngClass]="(pager.CurrentPage == (i + 1)) ? 'page-number-active' : ''"
+                            [ngStyle]="{'color': (pager.CurrentPage == (i + 1)) ? 'red' : ''}" 
+                            [routerLink]="[url]" 
+                            [queryParams]="page.kvps"
+                        >
+                            {{pager.StartPage! + i}}
+                        </a>
+                    </li>
+                    <ng-container *ngIf="pager?.CurrentPage! < pager?.TotalPages!">
+                        <li>
+                            <a [routerLink]="[url]" [queryParams]="nextPage">
+                                Next
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="[url]" [queryParams]="lastPage">
+                                Last
+                            </a>
+                        </li>
+                    </ng-container>
+            </ul>
+        </div>
+</div>

@@ -1,0 +1,30 @@
+.modelTablePagination {
+    text-align:center;
+}
+.modelTablePagination > ul {
+    margin-bottom: 0px;
+    margin-top:5px;
+    list-style-type: none;
+}
+.modelTablePagination > ul > li {
+    display: inline-block;
+    padding:5px;
+    margin:5px;
+}
+
+.active > a {
+    color: red;
+}
+
+.active > a:hover {
+    cursor: default;
+}
+
+input:disabled {
+    background-color: #dddddd;
+}
+
+.page-number-active {
+    pointer-events: none;
+    text-decoration: none;
+}
