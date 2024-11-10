@@ -33,6 +33,7 @@ import { DeleteRetailerComponent } from './components/retailers/delete/delete.co
 import { RetailerDetailsComponent } from './components/retailers/details/details.component';
 import { EditRetailerComponent } from './components/retailers/edit/edit.component';
 import { UserDetailsComponent } from './components/users/details/details.component';
+import { ItemsSearchComponent } from './components/items/search/search.component';
 
 const appName = 'Simple Data Management System'; // for setting a page title
 
@@ -51,6 +52,7 @@ const routes: Routes = [
           {path: ':itemId/edit', component: EditItemComponent},
           {path: ':itemId/delete', component: DeleteItemComponent},
           {path: ':itemId/details', component: ItemDetailsComponent},
+          {path: 'search', component:ItemsSearchComponent},
         ]
       },
       {
