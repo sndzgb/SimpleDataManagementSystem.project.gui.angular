@@ -14,6 +14,10 @@ export class PageTitleService {
 
 
     // items
+    set searchItemsTitle(o: null) {
+        this.title.setTitle("Search items - " + this.appName);
+    }
+
     get itemsTitle() {
         return this.title.setTitle("Items - " + this.appName);
     }
