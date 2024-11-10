@@ -12,9 +12,8 @@ import { RoutableComponent } from '../../base/routable/routable.component';
 })
 export class LogoutComponent extends RoutableComponent implements OnInit {
   
-
   constructor(
-    private authService: AuthService, 
+    protected authService: AuthService, 
     private router: Router, 
     private toastService: ToastService
   ) {

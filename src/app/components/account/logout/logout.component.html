@@ -1,5 +1,10 @@
 <div>
     <a [routerLink]="['/account/logout']" (click)="onLogoutClicked()">
-        Logout
+        Logout, 
+            <b>
+                <i>
+                    {{ this.authService.getAuthenticationItemValueByKey(authenticationItems.Username) }}
+                </i>
+            </b>
     </a>
 </div>

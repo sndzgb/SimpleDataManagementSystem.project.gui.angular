@@ -1,7 +1,7 @@
 export class Pager {
 
     public TotalItems: number | undefined;
-    public CurrentPage: number = 1;
+    public CurrentPage: number | undefined; //= 1;
     public PageSize: number | undefined;
     public TotalPages: number | undefined;
     public StartPage: number | undefined;
