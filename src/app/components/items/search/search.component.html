@@ -1,0 +1,132 @@
+<div class="header">
+    <h1>Search items - '<b>{{ this.searchQuery }}</b>'</h1>
+</div>
+
+<br>
+
+<div class="menu">
+    <div>
+        <go-back></go-back>
+    </div>
+</div>
+
+<br>
+
+<div class="search-container">
+    <div 
+        class="search-header" 
+        (click)="onCollapseSearchMenuClicked()" 
+        [ngClass]="collapsed ? 'search-header-bottom-wider-margin' : ''"
+    >
+        <div class="search-spacer">
+
+        </div>
+        <div class="search-title">
+            <label>Search options:</label>
+        </div>
+        <div class="search-toggler">
+            <button type="button" class="search-toggler-button">
+                <i [ngClass]="this.collapsed ? 'fa-solid fa-circle-chevron-down' : 'fa-solid fa-circle-chevron-up'">
+                </i>
+            </button>
+        </div>
+    </div>
+
+    <div class="search-form-controls" [ngClass]="this.collapsed ? 'search-menu-collapsed' : ''">
+        <form id="search-form" method="get" [formGroup]="this.formGroup" (ngSubmit)="onSearchFormSubmitted()">
+            <div class="search-input-controls">
+                <div class="search-query">
+                    <div>
+                        <label for="searchQuery">Search query:</label>
+                    </div>
+                    <div>
+                        <input style="text-align: center;" formControlName="searchQuery" id="searchQuery" />
+                    </div>
+                    <div>
+                        <small *ngIf="this.formGroup.get('searchQuery')?.errors?.['required'] 
+                                && this.formGroup.get('searchQuery')?.touched">
+                            Search query is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="search-sort">
+                    <div>
+                        <label for="sortBy">Sort by:</label>
+                    </div>
+                    <div>
+                        <select id="sortBy" formControlName="sortBy">
+                            <option *ngFor="let sortableItem of sortableItems" [value]="sortableItem">
+                                {{ getUserFriendlyEnumName(sortableItem) }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-take">
+                    <div>
+                        <label for="take">Take:</label>
+                    </div>
+                    <div>
+                        <input style="text-align: center; width:4ch;" integerOnly formControlName="take" id="take" />
+                    </div>
+                </div>
+                <div class="search-page">
+                    <div>
+                        <label for="page">Page:</label>
+                    </div>
+                    <div>
+                        <input style="text-align: center; width:4ch;" integerOnly formControlName="page" id="page" />
+                    </div>
+                </div>
+            </div>
+            <div class="search-form-submit-control">
+                <div>
+                    <button 
+                        type="submit" 
+                        class="button-default" 
+                        [disabled]="!formValid || !this.formGroup.dirty || !this.formGroup.touched"
+                    >
+                        Search
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="button-danger" (click)="onClearSearchParametersClicked()">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<http-errors-display [errors]="errors"></http-errors-display>
+
+<div class="table-default">
+    <table style="table-layout: fixed; width: 100%;">
+        <thead>
+            <tr>
+                <th>Naziv proizvoda</th>
+                <th>Cijena</th>
+                <th>Thumbnail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="max-height: 70px; height:70px;" *ngFor="let item of items?.items">
+                <!-- TODO safeHtml -->
+                <td [innerHTML]="getHighlightedText(item.nazivproizvoda) | safeHtml"></td>
+                <td [innerHTML]="getHighlightedText(item.cijena?.toString()!) | safeHtml"></td>
+                <td>
+                    <img 
+                        width="64"
+                        height="64" 
+                        [attr.src]="item?.URLdoslikeUri ? item.URLdoslikeUri : '/assets/resources/image_not_available.png'" 
+                    />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="no-data" *ngIf="items?.items?.length == 0">
+        No data to show.
+    </div>
+    <spinner *ngIf="!items && this.errors.length == 0"></spinner>
+</div>
+
+<pager *ngLoading="items" [pageInfo]="items?.pageInfo!"></pager>
