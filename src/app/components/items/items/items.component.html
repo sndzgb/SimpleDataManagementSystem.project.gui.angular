@@ -37,8 +37,12 @@
     </div>
 
     <div>
-        <input style="outline: none; flex-grow: 2; border: none; border-bottom: 1px solid gainsboro;" />
-        <button type="button" style="border: none; border-bottom: 1px solid gainsboro; background-color: white;">
+        <input [(ngModel)]="inputValue" style="outline: none; flex-grow: 2; border: none; border-bottom: 1px solid gainsboro;" />
+        <button 
+            (click)="onSearchItemsClicked()" 
+            type="button" 
+            style="border: none; border-bottom: 1px solid gainsboro; background-color: white;"
+        >
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </div>
@@ -145,4 +149,4 @@
 
 </div>
 
-    <pager *ngLoading="items" [pageInfo]="items?.pageInfo!"></pager>
+<pager *ngLoading="items" [pageInfo]="items?.pageInfo!"></pager>

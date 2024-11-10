@@ -5,6 +5,7 @@ import { Items } from 'src/app/models/read/items.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { RoutableComponent } from '../../base/routable/routable.component';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'items',
@@ -12,6 +13,11 @@ import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent extends RoutableComponent implements OnInit {
+
+  inputValue: string | null = null;
+  onSearchItemsClicked() {
+    this.router.navigate(['/items/search'], { queryParams: { searchQuery: encodeURIComponent(this.inputValue ?? "") } });
+  }
   
   items: Items | undefined;
   take: string = "8";
@@ -49,6 +55,7 @@ export class ItemsComponent extends RoutableComponent implements OnInit {
 
 
   constructor(
+    private router: Router,
     public itemsService: ItemsService, 
     public colorGeneratorPipe: ColorGeneratorPipe,
     public authService: AuthService
