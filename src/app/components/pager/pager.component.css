@@ -27,4 +27,5 @@ input:disabled {
 .page-number-active {
     pointer-events: none;
     text-decoration: none;
+    color: red;
 }

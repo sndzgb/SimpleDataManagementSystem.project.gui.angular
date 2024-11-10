@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Pager } from 'src/app/models/pager';
 import { NonRoutableComponent } from '../base/non-routable/non-routable.component';
 import { PageInfo } from 'src/app/models/read/page-info.model';
+
 export class keyvaluepair {
   constructor(k: string, v: string) {
     this.key = k;
