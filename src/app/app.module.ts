@@ -55,6 +55,8 @@ import { HttpErrorsDisplayComponent } from './components/http-errors-display/htt
 import { FormRequiredFieldsMessageComponent } from './components/form-required-fields-message/form-required-fields-message.component';
 import { EmbeddedFormComponent } from './components/base/embedded-form/embedded-form.component';
 import { UserDetailsComponent } from './components/users/details/details.component';
+import { ItemsSearchComponent } from './components/items/search/search.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ import { UserDetailsComponent } from './components/users/details/details.compone
     NumbersOnlyDirective,
     LoginComponent,
     ColorGeneratorPipe,
+    SafeHtmlPipe,
     LogoutComponent,
     EditItemComponent,
     PagerComponent,
@@ -103,6 +106,7 @@ import { UserDetailsComponent } from './components/users/details/details.compone
     FormRequiredFieldsMessageComponent,
     EmbeddedFormComponent,
     UserDetailsComponent,
+    ItemsSearchComponent,
   ],
   imports: [
     BrowserModule,
