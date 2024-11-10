@@ -6,19 +6,24 @@ import { Item } from '../models/read/item.model';
 import { EditItem } from '../models/write/edit-item.model';
 import { Items } from '../models/read/items.model';
 import { CreateItem } from '../models/write/create-item.model';
+import { ItemsSearchRequest, ItemsSearchResponse } from '../models/read/items-search.model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ItemsService {
 
-  constructor(private httpClient: HttpClient, private appConfigurationService: AppConfigurationService) {
-    
+  constructor(
+    private httpClient: HttpClient, 
+    private appConfigurationService: AppConfigurationService
+  ) {
+
   }
 
   createItem(item: CreateItem): Observable<string> {
 
     const formData = new FormData();
-    formData.append('urldoslike', item.URLdoslike!); //, item.URLdoslike.name);
+    formData.append('urldoslike', item.URLdoslike!);
     formData.append('nazivproizvoda', item.nazivproizvoda!);
     formData.append('opis', item.opis!);
     formData.append('cijena', item.cijena?.toString()!);
@@ -82,4 +87,18 @@ export class ItemsService {
     return response;
   }
 
+  searchItems(request: ItemsSearchRequest): Observable<ItemsSearchResponse> {
+
+    const p = {
+      take: request.take!,
+      page: request.page!,
+      sortBy: request.sortBy!,
+      searchQuery: request.searchQuery!
+    }
+    
+    return this.httpClient.get<ItemsSearchResponse>(this.appConfigurationService.webApiBaseUrl + `/api/items/search`, 
+      { params: p }
+    );
   }
+
+}
