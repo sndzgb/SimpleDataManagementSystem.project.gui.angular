@@ -126,7 +126,7 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
   rplc(originalValue: string, startIndex: number, replaceCharNumbers: number): string {
     let value = originalValue.substring(startIndex, startIndex + replaceCharNumbers);
     
-    let labeled = "<label style='background-color:yellow; font-weight:bold;'>" + value + "</label>";
+    let labeled = "<label class='HIGHLIGHTED-TEXT'>" + value + "</label>";
     let final = originalValue.substring(0, startIndex) + labeled + originalValue.substring(startIndex + replaceCharNumbers);
 
     return final;
@@ -148,13 +148,13 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
     }
   }
 
-  replace(index: number, replacement: string, old: string): string {
-    return old.substring(0, index) 
-      + "<label style='background-color:yellow; font-weight:bold;'>" 
-      + replacement 
-      + "</label>" 
-      + old.substring(index + replacement.length);
-  }
+  // replace(index: number, replacement: string, old: string): string {
+  //   return old.substring(0, index) 
+  //     + "<label style='background-color:yellow; font-weight:bold;'>" 
+  //     + replacement 
+  //     + "</label>" 
+  //     + old.substring(index + replacement.length);
+  // }
   
   onSearchFormSubmitted() {
 

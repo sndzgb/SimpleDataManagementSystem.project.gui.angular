@@ -109,9 +109,8 @@
         </thead>
         <tbody>
             <tr style="max-height: 70px; height:70px;" *ngFor="let item of items?.items">
-                <!-- TODO safeHtml -->
-                <td [innerHTML]="getHighlightedText(item.nazivproizvoda) | safeHtml"></td>
-                <td [innerHTML]="getHighlightedText(item.cijena?.toString()!) | safeHtml"></td>
+                <td [innerHTML]="getHighlightedText(item.nazivproizvoda) | sanitizeHtml"></td>
+                <td [innerHTML]="getHighlightedText(item.cijena?.toString()!) | sanitizeHtml"></td>
                 <td>
                     <img 
                         width="64"
