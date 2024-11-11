@@ -56,7 +56,7 @@ import { FormRequiredFieldsMessageComponent } from './components/form-required-f
 import { EmbeddedFormComponent } from './components/base/embedded-form/embedded-form.component';
 import { UserDetailsComponent } from './components/users/details/details.component';
 import { ItemsSearchComponent } from './components/items/search/search.component';
-import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -78,7 +78,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     NumbersOnlyDirective,
     LoginComponent,
     ColorGeneratorPipe,
-    SafeHtmlPipe,
+    SanitizeHtmlPipe,
     LogoutComponent,
     EditItemComponent,
     PagerComponent,
