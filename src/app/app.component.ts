@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy { // TODO extends RoutableComponent
 
 
   toastVisible: boolean = false;
@@ -22,12 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onToastVisibilityToggled(visible: boolean): void {
-    console.log("visibility toggled: " + visible);
     this.toastVisible = visible;
   }
 
   constructor(public toastService: ToastService) {
-    
     this.toastVisible = false;
   }
 

@@ -1,5 +1,6 @@
 import { Directive, Inject, Input, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from "@angular/core";
 import { AppPermissions } from "src/app/constants/app-permissions.enum";
+
 export interface PermissionsValues {
     operator?: string;
     permissions: AppPermissions[] | undefined;
@@ -17,14 +18,15 @@ export class VisibleIfHasPermissionsDirective implements OnInit, OnChanges {
         private templateRef: TemplateRef<any>,
         private viewContainer: ViewContainerRef
     ) {
+
     }
 
     ngOnInit(): void {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        
     }
+    
     @Input() set ngVisibleIfHasPermissions(pv: PermissionsValues) {
         let breakLoop: boolean = false;
         let pristine: boolean = true;
@@ -37,13 +39,11 @@ export class VisibleIfHasPermissionsDirective implements OnInit, OnChanges {
                 case AppPermissions.IsAuthenticated:
                     if (value.toLowerCase() != "true") {
                         pristine = false;
-                    
                     }
                 break;
                 case AppPermissions.IsAnonymous:
                     if (value.toLowerCase() != "true") {
                         pristine = false;
-                    
                     }
                 break;
                 case AppPermissions.HasRoleAdmin:
@@ -59,13 +59,11 @@ export class VisibleIfHasPermissionsDirective implements OnInit, OnChanges {
                 case AppPermissions.IsInRole:
                     if (value.toLowerCase() != 'true') {
                         pristine = false;
-                    
                     }
                 break;
                 case AppPermissions.Custom:
                     if (value.toLowerCase() != 'true') {
                         pristine = false;
-                    
                     }
                 break;
             }
@@ -75,7 +73,6 @@ export class VisibleIfHasPermissionsDirective implements OnInit, OnChanges {
             }
         }
         
-        
         if (pristine) {
             this.viewContainer.clear();
             this.viewContainer.createEmbeddedView(this.templateRef);
@@ -83,6 +80,4 @@ export class VisibleIfHasPermissionsDirective implements OnInit, OnChanges {
             this.viewContainer.clear();
         }
     }
-
-
-    }
+}

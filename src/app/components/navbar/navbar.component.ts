@@ -11,7 +11,6 @@ import { NonRoutableComponent } from '../base/non-routable/non-routable.componen
 })
 export class NavbarComponent extends NonRoutableComponent implements OnInit, OnDestroy {
 
-
   authenticated: boolean = false;
   userLoggedInSubscription?: Subscription;
   userLoggedOutSubscription?: Subscription;
@@ -19,13 +18,16 @@ export class NavbarComponent extends NonRoutableComponent implements OnInit, OnD
   
   constructor(public authService: AuthService, private router: Router) {
     super();
+
     this.userLoggedInSubscription = this.authService.userLoggedIn$.subscribe(() => {
       this.authenticated = true;
     });
+    
     this.userLoggedOutSubscription = this.authService.userLoggedOut$.subscribe(() => {
       this.authenticated = false;
     });
   }
+
 
   override ngOnDestroy(): void {
     super.ngOnDestroy();
