@@ -23,8 +23,8 @@ export class AccountsService {
         "username": login.username,
         "password": login.password
       },
-      
-    )
+    );
+
     return response;
   }
 

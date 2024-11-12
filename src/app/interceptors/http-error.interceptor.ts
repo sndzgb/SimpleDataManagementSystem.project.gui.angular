@@ -22,6 +22,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             .pipe(catchError((error: HttpErrorResponse) => {
 
                 let returnUrl2: string = this.router.url;
+
                 if (error.status == 0) {
                     this.toastService.show("Server unavailable.", ToastType.warning);
                     return EMPTY;
@@ -33,14 +34,18 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                     return EMPTY;
                 } else if (error.status == HttpStatusCode.Unauthorized) {
                     this.toastService.show("Please login to continue.", ToastType.danger);
-                    this.router.navigate(['/account/login'], { queryParams: { returnUrl: returnUrl2 }});
+                    this.router.navigate(['/account/login'], 
+                        { 
+                            queryParamsHandling: "preserve",
+                            queryParams: { returnUrl: returnUrl2 }
+                        }
+                    );
                     return EMPTY;
                 }
 
                 let e = error.error as HttpError;
 
                 return throwError(() => new WebApiHttpError(e.message, e.statusCode, e.errors));
-
             }
         ));
     } 

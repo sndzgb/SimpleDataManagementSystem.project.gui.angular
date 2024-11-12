@@ -43,11 +43,8 @@ export class LoginComponent extends FormComponent<LoginComponent> implements OnI
 
     this.pageTitleService.loginTitle;
 
-
     this.formGroup.addControl("username", new FormControl(null, [ Validators.required ]));
     this.formGroup.addControl("password", new FormControl(null, [ Validators.required ]));
-    
-
   }
   
   onLoginFormSubmitted(): void {
@@ -65,18 +62,15 @@ export class LoginComponent extends FormComponent<LoginComponent> implements OnI
         error: (error: WebApiHttpError) => {
           this.errors?.push(error);
           this.formValid = false;
-
         },
         next: (data) => {
           this.authService.setAuthentication(data.jwt!);
-
 
           // TODO compare url with returnUrl
           console.log("WINDOW:LOCATION:HREF");
           console.log(window.location.href);
 
           let returnUrl = this.getQueryParamValueByKey(QueryParams.returnUrl);
-
 
           this.router.navigateByUrl(returnUrl || "/");
         }
