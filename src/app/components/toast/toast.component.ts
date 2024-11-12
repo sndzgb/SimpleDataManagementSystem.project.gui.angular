@@ -36,9 +36,9 @@ export class ToastComponent extends NonRoutableComponent implements OnInit {
     super();
     this.toastService.toastShown.subscribe((t: Toast) => {
       this.showToast(t);
-      // setTimeout(() => {
-      //   this.hideToast();
-      // }, 2000);
+      setTimeout(() => {
+        this.hideToast();
+      }, 2000);
     });
 
     toastService.toastHidden.subscribe(() => {
