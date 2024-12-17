@@ -1,0 +1,120 @@
+
+
+.border-bottom-no-radius {
+    border-radius: 5px 5px 0px 0px !important;
+}
+
+.lang-options {
+    align-self: center;
+    display: flex;
+}
+.lang-options > img {
+    align-self:center;
+}
+
+.language-picker {
+    /*display:flex;*/
+    /*position: fixed;
+    top: 5px;
+    right: 20px;*/
+}
+
+.available-culture-option {
+    display: flex;
+}
+
+
+.lang-selected {
+    /*display: flex;*/
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.lang-icon {
+    align-self: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.lang-dropdown, button {
+    align-self: center;
+    cursor: pointer;
+}
+
+.lang-options {
+    cursor:pointer;
+}
+
+
+.dropdown-control {
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+ul, li {
+    width: fit-content;
+    height: fit-content;
+}
+
+li {
+    height: 24px;
+}
+
+.expanded {
+}
+
+.hidden {
+    display: none;
+}
+
+.bottom-border-no-radius {
+    border-radius: 5px 5px 0px 0px;
+}
+
+
+@media only screen and (min-width: 871px) {
+    .lang-options {
+        border: 1px solid white;
+        border-top: none;
+        border-radius: 0px 0px 5px 5px;
+        position: absolute;
+    }
+}
+
+@media only screen and (max-width: 870px) {
+    .lang-options {
+        position: relative;
+        border: 1px solid white;
+        border-top: none;
+        border-radius: 0px 0px 5px 5px;
+        /*display: inline-block;*/
+        /*display:flex;*/
+        padding: 5px;
+        margin: 0px;
+    }
+    .lang-selected {
+        /*display: inline-block;*/
+        padding: 5px;
+        margin: 0px;
+        /*display:none;*/
+    }
+    .lang-options {
+        /*align-self:center;*/
+    
+        /*display: flex;*/
+        /*flex-direction: column;*/
+        /*display: inline-block;*/
+    }
+    
+    .language-picker {
+        /*text-align:center;*/
+        flex-direction:column;
+        display:flex;
+        width:fit-content;
+        margin:auto;
+    }
+    /*.lang-selected, .lang-options {
+        text-align:center;
+    }*/
+}

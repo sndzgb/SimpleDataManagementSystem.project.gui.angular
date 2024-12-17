@@ -1,0 +1,36 @@
+<div class="language-picker">
+	<div class="lang-selected">
+		<div class="lang-icon" (click)="toggleLanguageDropdown($event)">
+			<img height="24" width="24" [src]="src">
+            <!-- <img height="24" width="24" src="./assets/resources/{{selectedLanguage}}.png"> -->
+		</div>
+	</div>
+
+	<div class="lang-options" [ngClass]="{'hidden': isCollapsed}">
+		<ul style="list-style-type: none; padding:0px; margin:0px;">
+            <ng-container *ngFor="let c of supportedCultures">
+                <!-- <ng-container *ngIf="c != selectedLanguage"> -->
+                <ng-container *ngIf="c != this.activeLocale">
+                    <li class="available-culture-option" (click)="changeLanguage(c)">
+                        <img height="24" width="24" src="./assets/resources/{{c}}.png" />
+                    </li>
+                </ng-container>
+            </ng-container>
+
+            <!-- <li 
+                class="available-culture-option" 
+                (click)="changeLanguage('')"
+                *ngFor="let c of supportedCultures"
+            >
+                <img height="24" width="24" src="/assets/resources/{{c}}.png" />
+            </li> -->
+            
+            <!-- <li 
+                class="available-culture-option" 
+                (click)="changeLanguage('en-US');"
+            >
+                <img height="24" width="24" src="/assets/resources/en-US.png" />
+            </li> -->
+		</ul>
+	</div>
+</div>
