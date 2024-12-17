@@ -36,7 +36,7 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
   take: number | null = 8;
   page: number | null = 1;
   sortBy: number | null = SortableItem.nazivproizvodaAsc;
-  searchQuery: string | null = "";
+  query: string | null = "";
   oldQuery: string | null = null;
 
   items: ItemsSearchResponse | null = null;
@@ -57,7 +57,7 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
   override ngOnInit(): void {
     super.ngOnInit();
 
-    this.formGroup.addControl("searchQuery", new FormControl(null, [ Validators.required ]));
+    this.formGroup.addControl("query", new FormControl(null, [ Validators.required ]));
     this.formGroup.addControl("page", new FormControl(null, null));
     this.formGroup.addControl("sortBy", new FormControl(null, null));
     this.formGroup.addControl("take", new FormControl(null, null));
@@ -72,10 +72,10 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
       this.errors = [];
       this.items = null;
 
-      this.oldQuery = this.searchQuery;
-      this.searchQuery = decodeURIComponent(this.getQueryParamValueByKey("searchQuery") ?? "");
+      this.oldQuery = this.query;
+      this.query = decodeURIComponent(this.getQueryParamValueByKey("query") ?? "");
       
-      if (this.oldQuery != this.searchQuery) {
+      if (this.oldQuery != this.query) {
         this.page = 1;
         this.take = 8;
       } else {
@@ -94,7 +94,7 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
         take: this.take,
         page: this.page,
         sortBy: this.sortBy,
-        searchQuery: this.searchQuery ?? "" //decodeURIComponent(this.searchQuery ?? "")
+        query: this.query ?? "" //decodeURIComponent(this.query ?? "")
       });
 
       this.itemsService.searchItems(
@@ -134,14 +134,14 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
 
   getHighlightedText(txt: string | null): string | null {
     // TODO ...
-    let x1 = decodeURIComponent(this.searchQuery!)
+    let x1 = decodeURIComponent(this.query!)
       .toLocaleUpperCase("hr-HR").normalize('NFD').replace(/\p{Diacritic}/gu, '');
     
     let x2 = txt?.toLocaleUpperCase("hr-HR").normalize('NFD').replace(/\p{Diacritic}/gu, '');
 
     let indexOf = x2?.indexOf(x1);
     if (indexOf != -1) {
-      let rpl = this.rplc(txt!, indexOf!, this.searchQuery?.length!);
+      let rpl = this.rplc(txt!, indexOf!, this.query?.length!);
       return rpl.toUpperCase();
     } else {
       return txt;
@@ -160,7 +160,7 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
 
     let take = this.formGroup.get('take')?.value;
     let page = this.formGroup.get('page')?.value;
-    let searchQuery = this.formGroup.get('searchQuery')?.value;
+    let query = this.formGroup.get('query')?.value;
     let sortBy = this.formGroup.get('sortBy')?.value;
     this.router.navigate(
       [], 
@@ -170,7 +170,7 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
           take: take, 
           page: page, 
           sortBy: sortBy, 
-          searchQuery: encodeURIComponent(searchQuery ?? "")
+          query: encodeURIComponent(query ?? "")
         },
         queryParamsHandling: 'merge',
         replaceUrl: true

@@ -1,5 +1,5 @@
 <div class="header">
-    <h1>Search items - '<b>{{ this.searchQuery }}</b>'</h1>
+    <h1>Search items - '<b>{{ this.query }}</b>'</h1>
 </div>
 
 <br>
@@ -37,14 +37,14 @@
             <div class="search-input-controls">
                 <div class="search-query">
                     <div>
-                        <label for="searchQuery">Search query:</label>
+                        <label for="query">Search query:</label>
                     </div>
                     <div>
-                        <input style="text-align: center;" formControlName="searchQuery" id="searchQuery" />
+                        <input style="text-align: center;" formControlName="query" id="query" />
                     </div>
                     <div>
-                        <small *ngIf="this.formGroup.get('searchQuery')?.errors?.['required'] 
-                                && this.formGroup.get('searchQuery')?.touched">
+                        <small *ngIf="this.formGroup.get('query')?.errors?.['required'] 
+                                && this.formGroup.get('query')?.touched">
                             Search query is required.
                         </small>
                     </div>
@@ -109,13 +109,13 @@
         </thead>
         <tbody>
             <tr style="max-height: 70px; height:70px;" *ngFor="let item of items?.items">
-                <td [innerHTML]="getHighlightedText(item.nazivproizvoda) | sanitizeHtml"></td>
+                <td [innerHTML]="getHighlightedText(item.nazivproizvoda!) | sanitizeHtml"></td>
                 <td [innerHTML]="getHighlightedText(item.cijena?.toString()!) | sanitizeHtml"></td>
                 <td>
                     <img 
                         width="64"
                         height="64" 
-                        [attr.src]="item?.URLdoslikeUri ? item.URLdoslikeUri : '/assets/resources/image_not_available.png'" 
+                        [attr.src]="item?.URLdoslike ? item.URLdoslike : './assets/resources/image_not_available.png'" 
                     />
                 </td>
             </tr>
