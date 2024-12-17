@@ -59,6 +59,7 @@ import { ItemsSearchComponent } from './components/items/search/search.component
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 import { NotificationsSidebarComponent } from './components/notifications-sidebar/notifications-sidebar.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { LocalizationComponent } from './components/localization/localization.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { NotificationComponent } from './components/notification/notification.co
     ItemsSearchComponent,
     NotificationComponent,
     NotificationsSidebarComponent,
+    LocalizationComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,14 @@
     "SimpleDataManagementSystem.Frontend.Web.Angular": {
       "projectType": "application",
       "schematics": {},
+      "i18n": {
+        "soruceLocale": "en-US",
+        "locales": {
+          "hr-HR": {
+            "translation": "src/locale/messages.hr.xlf"
+          }
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,6 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["en-US", "hr-HR"],
             "outputPath": "dist/simple-data-management-system.frontend.web.angular",
             "index": "src/index.html",
             "main": "src/main.ts",
