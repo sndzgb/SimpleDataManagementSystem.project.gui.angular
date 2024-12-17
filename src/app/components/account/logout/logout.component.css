@@ -1,8 +1,13 @@
-a {
+/* a {
     margin:5px;
     text-decoration: none;
 }
 
 .logout {
     margin-left: auto;
+} */
+
+a {
+    padding: 5px 8px;
+    text-decoration: none;
 }

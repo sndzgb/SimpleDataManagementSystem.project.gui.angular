@@ -19,6 +19,7 @@ export class CreateItemComponent extends FormComponent<CreateItem> implements On
 
   retailers: Retailers | undefined;
   categories: Categories | undefined;
+
   constructor(
     private router: Router,
     private itemsService: ItemsService,
@@ -40,6 +41,7 @@ export class CreateItemComponent extends FormComponent<CreateItem> implements On
     this.formGroup.addControl("retailerId", new FormControl(null, [ Validators.required ]));
     this.formGroup.addControl("cijena", new FormControl(null, [ Validators.required ]));
     this.formGroup.addControl("kategorija", new FormControl(null, [ Validators.required ]));
+    this.formGroup.addControl("isEnabled", new FormControl(true, null));
 
     this.retailersService.getAllRetailers().subscribe(
       {
@@ -71,9 +73,9 @@ export class CreateItemComponent extends FormComponent<CreateItem> implements On
 
   }
   
+
   override ngOnDestroy(): void {
     super.ngOnDestroy();
-
   }
 
 
@@ -96,9 +98,6 @@ export class CreateItemComponent extends FormComponent<CreateItem> implements On
         }
       }
     );
-
-    // TEST
   }
-  
   
 }

@@ -15,7 +15,7 @@ export class AppConfigurationService {
   loadAppConfig() : Promise<void> {
 
     var promise = firstValueFrom(
-      this.httpClient.get('/assets/app-configuration.json')
+      this.httpClient.get('./assets/app-configuration.json')
     )
     .then(
       (data) => { 

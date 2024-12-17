@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/read/user.model';
 import { RolesService } from 'src/app/services/roles.service';
 import { Role } from 'src/app/models/read/role.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormComponent } from '../../base/form/form.component';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
 import { EditUser } from 'src/app/models/write/edit-user.model';
+import { Roles } from 'src/app/models/read/roles.model';
+import { UserDetails } from 'src/app/models/read/user-details.model';
 
 @Component({
   selector: 'edit-user',
@@ -18,8 +19,8 @@ import { EditUser } from 'src/app/models/write/edit-user.model';
 export class EditUserComponent extends FormComponent<EditUserComponent> implements OnInit, OnDestroy {
 
   userId: number | null = null;
-  user: User | undefined;
-  userRoles: Role[] | undefined;
+  user: UserDetails | undefined;
+  userRoles: Roles | undefined;
 
   constructor(
     public authService: AuthService, 
@@ -48,12 +49,9 @@ export class EditUserComponent extends FormComponent<EditUserComponent> implemen
       }
     });
 
-
     this.formGroup.addControl("roleId", new FormControl(null, [ Validators.required ]));
     this.formGroup.addControl("username", new FormControl(null, [ Validators.required ]));
     
-
-
     this.usersService.getUser(this.userId!).subscribe(
       {
         complete: () => { 

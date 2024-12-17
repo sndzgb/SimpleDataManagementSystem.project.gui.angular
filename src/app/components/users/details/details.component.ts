@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutableComponent } from '../../base/routable/routable.component';
-import { User } from 'src/app/models/read/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
+import { UserDetails } from 'src/app/models/read/user-details.model';
 
 @Component({
   selector: 'user-details',
@@ -13,7 +13,7 @@ import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
 export class UserDetailsComponent extends RoutableComponent implements OnInit, OnDestroy {
 
   userId: number | null = null;
-  user: User | undefined;
+  user: UserDetails | undefined;
   
   constructor(
     public authService: AuthService, 

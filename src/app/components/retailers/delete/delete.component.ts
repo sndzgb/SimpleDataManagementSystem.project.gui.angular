@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Retailer } from 'src/app/models/read/retailer.model';
+import { RetailerDetails } from 'src/app/models/read/retailer-details.model';
 import { RetailersService } from 'src/app/services/retailers.service';
 import { FormComponent } from '../../base/form/form.component';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
@@ -10,9 +10,9 @@ import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
   templateUrl: './delete.component.html',
   styleUrls: ['./delete.component.css']
 })
-export class DeleteRetailerComponent extends FormComponent<Retailer> implements OnInit, OnDestroy {
+export class DeleteRetailerComponent extends FormComponent<RetailerDetails> implements OnInit, OnDestroy {
   
-  retailer: Retailer | null = null;
+  retailer: RetailerDetails | null = null;
   retailerId: number | null = null;
 
   constructor(

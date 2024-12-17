@@ -65,7 +65,7 @@
             <tr style="max-height: 70px; height:70px;" *ngFor="let u of users?.users">
                 <td>{{ u.id }}</td>
                 <td>{{ u.username }}</td>
-                <td>{{ u.roleName }}</td>
+                <td>{{ u.role?.name }}</td>
                 <td [ngStyle]="{'color': u.isPasswordChangeRequired ? 'red' : 'black'}">
                     {{ (u.isPasswordChangeRequired ? "Yes" : "No") }}
                 </td>

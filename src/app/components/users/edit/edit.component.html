@@ -38,7 +38,7 @@
                     </div>
                     <div>
                         <em>
-                            <label>{{user.isPasswordChangeRequired}}</label>
+                            <label>{{user.isPasswordChangeRequired | booleanToYesNo}}</label>
                         </em>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             <option 
                                 [disabled]="r.name == 'Admin'" 
                                 [selected]="user.roleId == r.id" 
-                                *ngFor="let r of userRoles" 
+                                *ngFor="let r of userRoles?.roles" 
                                 [value]="r.id"
                             >
                                 {{ r.name }}

@@ -93,12 +93,12 @@
 
                 <div class="starboard-side single-per-line">
                     <div class="image-control">
-                        <div *ngIf="retailer?.logoImageUri">
+                        <div *ngIf="retailer?.logoImageUrl">
                             <div>
                                 <label>Thumbnail:</label>
                             </div>
                             <div style="position: relative; width:fit-content; margin: auto;">
-                                <img width="300" height="300" [attr.src]="retailer.logoImageUri" />
+                                <img width="300" height="300" [attr.src]="retailer.logoImageUrl" />
                                 <button type="button" 
                                     style="
                                         position:absolute; 
@@ -120,8 +120,9 @@
                                     </i>
                                 </button>
                             </div>
+                            <input formControlName="deleteCurrentLogoImage" hidden />
                         </div>
-                        <div *ngIf="!retailer?.logoImageUri">
+                        <div *ngIf="!retailer?.logoImageUrl">
                             <file-upload
                                 [maxSize]="0.5 * 1024 * 1024"
                                 [form]="formGroup"

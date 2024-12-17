@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Category } from 'src/app/models/read/category.model';
+import { CategoryDetails } from 'src/app/models/read/category-details.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { FormComponent } from '../../base/form/form.component';
@@ -10,10 +10,10 @@ import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
   templateUrl: './delete.component.html',
   styleUrls: ['./delete.component.css']
 })
-export class DeleteCategoryComponent extends FormComponent<Category> implements OnInit, OnDestroy {
+export class DeleteCategoryComponent extends FormComponent<CategoryDetails> implements OnInit, OnDestroy {
   
   categoryId: number | null = null;
-  category: Category | null = null;
+  category: CategoryDetails | null = null;
 
   constructor(
     private router: Router, 

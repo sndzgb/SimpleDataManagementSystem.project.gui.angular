@@ -1,5 +1,5 @@
 <div class="header" *ngLoading="item">
-    <h1>Delete item - '<b>{{ item?.nazivproizvoda }}</b>'</h1>
+    <h1>Delete item - '<b>{{ item?.item?.nazivproizvoda }}</b>'</h1>
 </div>
 
 
@@ -34,7 +34,7 @@
                         </div>
                         <div>
                             <em>
-                                <label>{{item.nazivproizvoda}}</label>
+                                <label>{{item.item?.nazivproizvoda}}</label>
                             </em>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div>
                             <em>
-                                <label>{{item.opis}}</label>
+                                <label>{{item.item?.opis}}</label>
                             </em>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         </div>
                         <div>
                             <em>
-                                <label>{{item.cijena}}</label>
+                                <label>{{item.item?.cijena}}</label>
                             </em>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div>
                             <em>
-                                <label>{{item.datumakcije}}</label>
+                                <label>{{item.item?.datumakcije}}</label>
                             </em>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         </div>
                         <div>
                             <em>
-                                <label>{{item.kategorija}}</label>
+                                <label>{{item.item?.category?.name}}</label>
                             </em>
                         </div>
                     </div>
@@ -97,13 +97,13 @@
                 <div class="starboard-side">
                     <div 
                         class="image-readonly-control"
-                        [ngSwitch]="item.URLdoslikeUri == null"
+                        [ngSwitch]="item.item?.URLdoslike == null"
                     >
                         <img *ngSwitchCase="false" 
-                            [src]="item.URLdoslikeUri" 
+                            [src]="item.item?.URLdoslike" 
                         />
                         <img *ngSwitchCase="true" 
-                            [attr.src]="'/assets/resources/image_not_available.png'" 
+                            [attr.src]="'./assets/resources/image_not_available.png'" 
                             alt="no image available"
                         />
                     </div>

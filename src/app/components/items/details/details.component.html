@@ -1,5 +1,5 @@
 <div class="header" *ngLoading="item">
-    <h1>Item details - '<b>{{item?.nazivproizvoda}}</b>'</h1>
+    <h1>Item details - '<b>{{item?.item?.nazivproizvoda}}</b>'</h1>
 </div>
 
 <br>
@@ -29,7 +29,7 @@
                     </div>
                     <div>
                         <em>
-                            <label>{{item?.nazivproizvoda}}</label>
+                            <label>{{item?.item?.nazivproizvoda}}</label>
                         </em>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div>
                         <em>
-                            <label>{{item?.cijena}}</label>
+                            <label>{{item?.item?.cijena}}</label>
                         </em>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div>
                         <em>
-                            <label>{{item?.datumakcije}}</label>
+                            <label>{{item?.item?.datumakcije}}</label>
                         </em>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     </div>
                     <div>
                         <em>
-                            <label>{{item?.kategorija}}</label>
+                            <label>{{item?.item?.category?.name}}</label>
                         </em>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     </div>
                     <div>
                         <em>
-                            <label>{{item?.nazivretailera}}</label>
+                            <label>{{item?.item?.nazivretailera}}</label>
                         </em>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                     </div>
                     <div>
                         <em>
-                            <label>{{item?.retailerId}}</label>
+                            <label>{{item?.item?.retailer?.id}}</label>
                         </em>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                     </div>
                     <div>
                         <em>
-                            <label>{{item?.opis}}</label>
+                            <label>{{item?.item?.opis}}</label>
                         </em>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
 
             <div class="starboard-side">
                 <div class="image-readonly-control">
-                    <img [attr.src]="item?.URLdoslikeUri ? item?.URLdoslikeUri: '/assets/resources/image_not_available.png'" />
+                    <img [attr.src]="item?.item?.URLdoslike ? item?.item?.URLdoslike: './assets/resources/image_not_available.png'" />
                 </div>
             </div>
 

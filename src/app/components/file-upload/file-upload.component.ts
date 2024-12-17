@@ -79,7 +79,6 @@ export class FileUploadComponent extends NonRoutableComponent implements OnInit,
 
     reader.readAsDataURL(this.preview!);
 
-    
     this.fileSet.emit(this.file!);
   }
 

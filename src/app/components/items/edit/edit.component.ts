@@ -2,7 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, OnChanges, OnDestroy, OnIni
 import { FormsModule, FormArray, FormBuilder, FormControl, FormControlStatus, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categories } from 'src/app/models/read/categories.model';
-import { Item } from 'src/app/models/read/item.model';
+import { ItemDetails } from 'src/app/models/read/item-details.model';
 import { Retailers } from 'src/app/models/read/retailers.model';
 import { EditItem } from 'src/app/models/write/edit-item.model';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -22,7 +22,7 @@ export class EditItemComponent extends FormComponent<EditItem> implements OnInit
   itemId: string | null = null;
   categories: Categories | null = null;
   retailers: Retailers | null = null;
-  item: Item | undefined;
+  item: ItemDetails | undefined;
 
   constructor(
     private router: Router, 
@@ -34,21 +34,29 @@ export class EditItemComponent extends FormComponent<EditItem> implements OnInit
   }
 
 
-  onRemoveProductImageClicked(item: Item) {
-    let uri = encodeURIComponent(this.item?.nazivproizvoda!);
-    this.itemsService.updateItemPartial(uri).subscribe(
-      {
-        complete: () => {
-        },
-        error: (error: WebApiHttpError) => {
-          this.formValid = false;
-          this.errors?.push(error);
-        },
-        next: () => {
-          this.item!.URLdoslikeUri = null;
-        }
-      }
-    );
+  onRemoveProductImageClicked(item: ItemDetails) {
+    this.item!.item!.URLdoslike = null;
+    this.formGroup.patchValue({
+      deleteCurrentURLdoslike: true
+    });
+
+    this.formGroup.markAsDirty();
+    this.formGroup.markAsTouched();
+    
+    // let uri = encodeURIComponent(this.item?.item?.nazivproizvoda!);
+    // this.itemsService.updateItemPartial(uri).subscribe(
+    //   {
+    //     complete: () => {
+    //     },
+    //     error: (error: WebApiHttpError) => {
+    //       this.formValid = false;
+    //       this.errors?.push(error);
+    //     },
+    //     next: () => {
+    //       this.item!.item!.URLdoslike = null;
+    //     }
+    //   }
+    // );
   }
 
   override ngOnInit(): void {
@@ -76,7 +84,12 @@ export class EditItemComponent extends FormComponent<EditItem> implements OnInit
     this.formGroup.addControl("kategorija", new FormControl(null, 
       [ Validators.required ]
     ));
-    
+    this.formGroup.addControl("deleteCurrentURLdoslike", new FormControl(false, 
+      null
+    ));
+    this.formGroup.addControl("isEnabled", new FormControl(null, 
+      null
+    ));
 
 
 
@@ -91,14 +104,15 @@ export class EditItemComponent extends FormComponent<EditItem> implements OnInit
         next: (data) => {
           this.item = data;
           this.formGroup.patchValue({
-            cijena: this.item.cijena,
-            opis: this.item.opis,
-            datumakcije: this.item.datumakcije,
-            retailerId: this.item.retailerId,
-            kategorija: this.item.kategorija,
+            cijena: this.item.item?.cijena,
+            opis: this.item.item?.opis,
+            datumakcije: this.item.item?.datumakcije,
+            retailerId: this.item.item?.retailer?.id,
+            kategorija: this.item.item?.category?.id,
+            isEnabled: this.item.item?.isEnabled
           });
 
-          this.pageTitleService.editItemTitle = this.item?.nazivproizvoda!;
+          this.pageTitleService.editItemTitle = this.item.item?.nazivproizvoda!;
         }
       }
     );

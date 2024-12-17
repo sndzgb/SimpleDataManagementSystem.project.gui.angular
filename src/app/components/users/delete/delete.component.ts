@@ -2,19 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
-import { User } from 'src/app/models/read/user.model';
 import { FormComponent } from '../../base/form/form.component';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
+import { UserDetails } from '../details/details.model';
 
 @Component({
   selector: 'delete-user',
   templateUrl: './delete.component.html',
   styleUrls: ['./delete.component.css']
 })
-export class DeleteUserComponent extends FormComponent<User> implements OnInit, OnDestroy {
+export class DeleteUserComponent extends FormComponent<UserDetails> implements OnInit, OnDestroy {
 
   userId: number | null = null;
-  user: User | null = null;
+  user: UserDetails | null = null;
   
   constructor(
     public authService: AuthService, 

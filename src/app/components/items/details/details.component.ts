@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutableComponent } from '../../base/routable/routable.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { ItemsService } from 'src/app/services/items.service';
-import { Item } from 'src/app/models/read/item.model';
+import { Item, ItemDetails } from 'src/app/models/read/item-details.model';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
 
 @Component({
@@ -13,7 +13,7 @@ import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
 export class ItemDetailsComponent extends RoutableComponent implements OnInit, OnDestroy {
 
   nazivproizvoda: string | null = null;
-  item: Item | null = null;
+  item: ItemDetails | null = null;
 
   constructor(
     private itemsService: ItemsService,
@@ -39,7 +39,7 @@ export class ItemDetailsComponent extends RoutableComponent implements OnInit, O
         },
         next: (data) => {
           this.item = data;
-          this.pageTitleService.itemDetailsTitle = this.item.nazivproizvoda!;
+          this.pageTitleService.itemDetailsTitle = this.item.item?.nazivproizvoda!;
         }
       }
     );

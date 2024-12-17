@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AccountsService } from "src/app/services/accounts.service";
-import { User } from "src/app/models/read/user.model";
+import { UserDetails } from "src/app/models/read/user-details.model";
 import { RoutableComponent } from "../../base/routable/routable.component";
 
 @Component({
@@ -10,7 +10,7 @@ import { RoutableComponent } from "../../base/routable/routable.component";
 })
 export class AccountDetailsComponent extends RoutableComponent implements OnInit {
     
-    account: User | null = null;
+    account: UserDetails | null = null;
 
     constructor(private accountsService: AccountsService) {
         super();

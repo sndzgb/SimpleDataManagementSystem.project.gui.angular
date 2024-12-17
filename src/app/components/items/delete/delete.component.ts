@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Item } from 'src/app/models/read/item.model';
+import { Item, ItemDetails } from 'src/app/models/read/item-details.model';
 import { ItemsService } from 'src/app/services/items.service';
 import { FormComponent } from '../../base/form/form.component';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
@@ -12,7 +12,7 @@ import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
 })
 export class DeleteItemComponent extends FormComponent<Item> implements OnInit, OnDestroy {
 
-  item: Item | null = null;
+  item: ItemDetails | null = null;
   itemId: string | null = null;
 
   
@@ -50,7 +50,7 @@ export class DeleteItemComponent extends FormComponent<Item> implements OnInit, 
         },
         next: (data) => {
           this.item = data;
-          this.pageTitleService.deleteItemTitle = this.item.nazivproizvoda!;
+          this.pageTitleService.deleteItemTitle = this.item?.item?.nazivproizvoda!;
         }
       }
     );

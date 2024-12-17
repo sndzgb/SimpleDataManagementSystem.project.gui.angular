@@ -1,5 +1,5 @@
 <div class="header" *ngLoading="item">
-    <h1>Edit item - '<b>{{ item?.nazivproizvoda }}</b>'</h1>
+    <h1>Edit item - '<b>{{ item?.item?.nazivproizvoda }}</b>'</h1>
 </div>
 
 <br>
@@ -48,7 +48,7 @@
                         <div>
                             <small *ngIf="this.formGroup.get('opis')?.errors?.['maxlength'] 
                                     && this.formGroup.get('opis')?.touched">
-                                Naziv proizvoda exceeds maximum character length.
+                                Opis exceeds maximum character length.
                             </small>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
 
                     <div class="input-control single-per-line">
                         <div class="required">
-                                <label for="cijena">Cijena:</label>
+                            <label for="cijena">Cijena:</label>
                         </div>
                         <div>
                             <input numbersOnly formControlName="cijena" type="number" id="cijena" />
@@ -84,6 +84,17 @@
                                     && this.formGroup.get('cijena')?.touched">
                                 Cijena is required.
                             </small>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="input-control single-per-line">
+                        <div>
+                            <label for="isEnabled">Enabled:</label>
+                        </div>
+                        <div>
+                            <input formControlName="isEnabled" type="checkbox" id="isEnabled" />
                         </div>
                     </div>
 
@@ -128,12 +139,12 @@
 
                 <div class="starboard-side">
                     <div class="image-control">
-                        <div *ngIf="item?.URLdoslikeUri">
+                        <div *ngIf="item?.item?.URLdoslike">
                             <div>
                                 <label>Thumbnail:</label>
                             </div>
                             <div style="position: relative; width:fit-content; margin: auto;">
-                                <img width="300" height="300" [attr.src]="item.URLdoslikeUri" />
+                                <img width="300" height="300" [attr.src]="item.item?.URLdoslike" />
                                 <button type="button" 
                                     style="
                                         position:absolute; 
@@ -155,8 +166,9 @@
                                     </i>
                                 </button>
                             </div>
+                            <input formControlName="deleteCurrentURLdoslike" hidden />
                         </div>
-                        <div *ngIf="!item.URLdoslikeUri">
+                        <div *ngIf="!item.item?.URLdoslike">
                             <file-upload
                                 [maxSize]="0.5 * 1024 * 1024"
                                 [form]="formGroup"

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditCategory } from 'src/app/models/write/edit-category.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { Category } from 'src/app/models/read/category.model';
+import { CategoryDetails } from 'src/app/models/read/category-details.model';
 import { FormComponent } from '../../base/form/form.component';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
 
@@ -15,7 +15,7 @@ import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
 export class EditCategoryComponent extends FormComponent<EditCategory> implements OnInit, OnDestroy {
 
   categoryId: number | null = null;
-  category: Category | undefined;
+  category: CategoryDetails | undefined;
   
 
   constructor(

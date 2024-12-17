@@ -16,7 +16,7 @@
                 [ngStyle]="{'pointer-events': form.disabled ? 'none' : ''}"
                 (click)="onOpenFileDialogClicked($event)"
                 style="width:300px; height:300px; max-width:300px; max-height:300px; cursor:pointer;" 
-                [attr.src]="preview ? preview : '/assets/resources/image_not_available.png'"
+                [attr.src]="preview ? preview : './assets/resources/image_not_available.png'"
             />
 
             <div style="position:absolute; top:10px; right: 10px; cursor:pointer;" *ngIf="preview">
@@ -60,4 +60,4 @@
             </div>
         </div>
     </div>
-            </div>
+</div>
