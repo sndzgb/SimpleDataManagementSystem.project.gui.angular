@@ -74,7 +74,7 @@
                 <td>{{ r.id }}</td>
                 <td>{{ r.name }}</td>
                 <td>{{ r.priority }}</td>
-                <td><img height="64" width="64" [attr.src]="r.logoImageUri ? r.logoImageUri : '/assets/resources/image_not_available.png'" /></td>
+                <td><img height="64" width="64" [attr.src]="r.logoImageUrl ? r.logoImageUrl : './assets/resources/image_not_available.png'" /></td>
                 <td 
                     *ngVisibleIfHasPermissions="{ 
                         permissions: [appPermissions.IsInRole], 

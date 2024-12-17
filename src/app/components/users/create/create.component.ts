@@ -44,7 +44,7 @@ export class CreateUserComponent extends FormComponent<CreateUser> implements On
           this.errors?.push(error);
         },
         next: (data) => {
-          this.assignableRoles = data.splice(1, 2); // remove "Admin" role
+          this.assignableRoles = data.roles?.splice(1, 2); // remove "Admin" role
         }
       }
     );
