@@ -1,0 +1,64 @@
+
+.n {
+    border: 1px solid gainsboro;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0px 5px;
+    margin: 10px 0px;
+    /*position:relative;*/
+    /*height: 50px;*/
+    /*display: flex;*/
+    /*min-height:100px;*/
+}
+
+
+.time {
+    text-align: start;
+    width: 100%;
+    font-size: 12px;
+}
+
+
+.cc {
+    display: flex;
+    justify-content: space-between;
+    /*flex-direction: row;*/
+}
+
+/**/
+.con {
+    /*border: 1px solid brown;*/
+    height: fit-content;
+    /*padding-right:15px;*/
+    /*display:inline-block;*/
+}
+
+
+
+.c {
+    padding: 0px;
+    /*border: 1px solid magenta;*/
+    align-self: flex-start;
+    background-color: white;
+    /*display:inline;*/
+    /*justify-self: flex-end;*/
+    /*justify-content: flex-end;*/
+    /*margin-left: auto;*/
+    /*position:absolute;*/
+    /*top:5px;*/
+    /*right:5px;*/
+}
+/**/
+
+
+.b-c:hover {
+    background-color: gainsboro;
+    border-radius: 2px;
+}
+
+.b-c {
+    background-color: white;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}

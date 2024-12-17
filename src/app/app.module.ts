@@ -57,6 +57,8 @@ import { EmbeddedFormComponent } from './components/base/embedded-form/embedded-
 import { UserDetailsComponent } from './components/users/details/details.component';
 import { ItemsSearchComponent } from './components/items/search/search.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
+import { NotificationsSidebarComponent } from './components/notifications-sidebar/notifications-sidebar.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +109,8 @@ import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
     EmbeddedFormComponent,
     UserDetailsComponent,
     ItemsSearchComponent,
+    NotificationComponent,
+    NotificationsSidebarComponent,
   ],
   imports: [
     BrowserModule,

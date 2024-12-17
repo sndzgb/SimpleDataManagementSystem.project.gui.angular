@@ -1,0 +1,32 @@
+<div class="ns" id="notes" [ngStyle]="{'left': isCollapsed ? '-300px' : '0px'}">
+    <ng-container *ngIf="notifications!.length == 0">
+        <div id="no-notifications-messsage">
+            <label>No new notifications.</label>
+        </div>
+    </ng-container>
+
+    <div class="content-cont">
+        <div 
+            class="togg" 
+            id="notes-toggler" 
+            [ngStyle]="{'left': isCollapsed ? '0px' : '300px'}" 
+            (click)="onToggleNotificationsSidebarClicked($event)"
+        >
+            <div class="notes-t coll ex">
+                <label class="n-notifier">Notifications</label>
+            </div>
+            <div class="notes-t expa">
+                <i 
+                    [ngClass]="isCollapsed ? 'fa-chevron-right' : 'fa-chevron-left'" 
+                    class="notifications-sidebar fa-solid xl"
+                >
+                </i>
+            </div>
+        </div>
+        <div class="notes-cont">
+            <div *ngFor="let n of notifications">
+                <notification [notification]="n" (notificationIdToRemove)="onRemoveNotification($event)"></notification>
+            </div>
+        </div>
+    </div>
+</div>

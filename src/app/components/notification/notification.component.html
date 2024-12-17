@@ -1,0 +1,16 @@
+<div class="n cont">
+    <div class="time">
+        <label>{{notification?.id}}</label>
+    </div>
+    <hr style="margin:1px 0px; padding:0px;" />
+    <div class="cc">
+        <div class="con">
+            <label>{{notification?.message}}</label>
+        </div>
+        <div class="c" (click)="removeNotification(notification!.id)">
+            <button class="b-c">
+                &#10006;
+            </button>
+        </div>
+    </div>
+</div>
