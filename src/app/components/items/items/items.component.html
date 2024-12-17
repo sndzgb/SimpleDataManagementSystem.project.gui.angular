@@ -4,7 +4,7 @@
 
 <br>
 
-<div class="menu">
+<!-- <div class="menu">
     <div>
         <a
             *ngVisibleIfHasPermissions="{ 
@@ -37,7 +37,10 @@
     </div>
 
     <div>
-        <input [(ngModel)]="inputValue" style="outline: none; flex-grow: 2; border: none; border-bottom: 1px solid gainsboro;" />
+        <input 
+            [(ngModel)]="inputValue" #itemsSearchQuery
+            style="outline: none; flex-grow: 2; border: none; border-bottom: 1px solid gainsboro;" 
+        />
         <button 
             (click)="onSearchItemsClicked()" 
             type="button" 
@@ -45,8 +48,103 @@
         >
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+        <div *ngIf="inputValue == null" style="text-align: center; color:red;">
+            <small>
+                Search query is required.
+            </small>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="menu">
+    <div class="menu-options">
+        
+        <ng-container>
+            <div>
+                <div style="display:inline-block;">
+                    <div style="display:inline-block;">
+                        <a [routerLink]="['/items/create']">
+                            <button class="button-default" type="button" i18n>
+                                Create
+                            </button>
+                        </a>
+                    </div>
+                    <div style="display:inline-block;">
+                        <label>Create new item</label>
+                    </div>
+                </div>
+
+                <br />
+
+                <div style="display:inline-block;">
+                    <div style="display:inline-block;">
+                        <button 
+                                data-target="enable-disable" 
+                                (click)="onToggleEnableDisableColumnClicked($event)" 
+                                type="button" 
+                                class="button-default toggle-enable-disable-column">
+                            Toggle
+                        </button>
+                    </div>
+                    <div style="display:inline-block;">
+                        <label>Toggle enable/ disable items column</label>
+                    </div>
+                </div>
+
+                <br />
+
+                <div style="display:inline-block;">
+                    <div style="display:inline-block; padding:5px 0px; margin:1px; min-width: 100px; text-align:center;">
+                        <!-- <form method="get" name="formFilter" #formFilter> -->
+                            <!-- (change)="onCbToggle($event)" -->
+                            <input 
+                                type="checkbox" 
+                                (change)="onCbToggle($event);" 
+                                [checked]="enabled_only" 
+                            />
+                            <input type="hidden" [value]="enabled_only" name="enabled_only" />
+                        <!-- </form> -->
+                    </div>
+                    <div style="display:inline-block;">
+                        <label>Show enabled items only</label>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+
+    <div class="spacer">
+    </div>
+
+    <!-- TODO error message -->
+    <div class="search-control-wrapper">
+        <form method="get" validatable asp-page="/Items/Search">
+            <div class="search-control">
+                <input 
+                    class="" 
+                    form-field-required 
+                    name="query"
+                    data-validation-required-error-message="Search query is required."
+                    placeholder="Enter a search query..."
+                    style="outline: none;  border: none; border-bottom: 1px solid gainsboro;" 
+                />
+                <button 
+                    type="submit" 
+                    class="search-input-control" 
+                    style="border: none; border-bottom: 1px solid gainsboro; background-color: white;"
+                >
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
+
+
+
 
 
 <br />
@@ -55,6 +153,30 @@
     <table style="table-layout: fixed; width: 100%;">
         <thead>
             <tr>
+                <ng-container *ngIf="toggleEnableDisableVisible">
+                    <th
+                        *ngVisibleIfHasPermissions="{ 
+                            permissions: [appPermissions.IsInRole], 
+                            values: [
+                                (
+                                    (
+                                        this.roles.Admin.toString() 
+                                        ==
+                                        this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                    )
+                                    ||
+                                    (
+                                        this.roles.Employee.toString()
+                                        ==
+                                        this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                    )
+                                ).toString()
+                            ]
+                        }"
+                    >
+                        Enabled
+                    </th>
+                </ng-container>
                 <th>Naziv proizvoda</th>
                 <th>Opis</th>
                 <th>Datum akcije</th>
@@ -87,17 +209,37 @@
         </thead>
         <tbody>
             <tr style="max-height: 70px; height:70px;" *ngFor="let item of items?.items">
-                <td [ngStyle]="item.nazivproizvoda! | colorGenerator">{{ item.nazivproizvoda }}</td>
+                <td *ngIf="toggleEnableDisableVisible">
+                    <input 
+                        [value]="item.nazivproizvoda"
+                        type="checkbox" 
+                        (change)="onEnableDisableChanged($event.target)" 
+                        [checked]="item.isEnabled" 
+                    />
+                </td>
+                <td class="identifier" [ngStyle]="item.nazivproizvoda! | colorGenerator">
+                    <ng-container *ngIf="item?.isEnabled">
+                        <div class="monitored-favorites-counter" title="Total number of users monitoring this item">
+                            <i class="fa-solid fa-bookmark light-color"></i>
+                            <label class="total-users-monitoring-counter">
+                                {{item?.monitoring?.totalUsersMonitoringThisItem}}
+                            </label>
+                        </div>
+                    </ng-container>
+                    <div name="id">
+                        {{ item.nazivproizvoda }}
+                    </div>
+                </td>
                 <td>{{ item.opis }}</td>
                 <td>{{ item.datumakcije }}</td>
                 <td>{{ item.cijena }}</td>
-                <td [ngClass]="item.kategorija == 1 ? 'kategorija1' : 'nema'">{{ item.kategorija }}</td>
+                <td>{{ item.category?.id }}</td>
 
                 <td>
                     <img 
                         width="64"
                         height="64" 
-                        [attr.src]="item?.URLdoslikeUri ? item.URLdoslikeUri : '/assets/resources/image_not_available.png'" 
+                        [attr.src]="item?.URLdoslike ? item.URLdoslike : './assets/resources/image_not_available.png'" 
                     />
                 </td>
 
@@ -122,6 +264,20 @@
                     }"
                     class="options"
                 >
+                    <label
+                        class="monitored"
+                        style="cursor:pointer; color: Dodgerblue;" 
+                        title="Add to monitor list"
+                    >
+                        <i 
+                            class="fa-bookmark"
+                            (click)="onToggleMonitoredItemClicked($event.target)"
+                            [ngClass]="item.monitoring?.isMonitoredByCurrentUser ? 'fa-solid' : 'fa-regular'"
+                        >
+                        </i>
+                    </label>
+                    <span>&nbsp;</span>
+                    <span>&nbsp;</span>
                     <a [routerLink]="['/items', item.nazivproizvoda, 'details']">
                         <i class="fa-solid fa-circle-info"></i>
                     </a>
