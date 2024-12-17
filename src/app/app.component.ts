@@ -37,4 +37,4 @@ export class AppComponent implements OnInit, OnDestroy { // TODO extends Routabl
     this.toastShownSubscription?.unsubscribe();
     this.toastHiddenSubscription?.unsubscribe();
   }
-  }
+}
