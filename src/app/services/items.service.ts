@@ -1,8 +1,8 @@
-import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, EMPTY, Observable, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, Observable, of, retry, tap, throwError } from 'rxjs';
 import { AppConfigurationService } from './app-configuration.service';
-import { Item } from '../models/read/item.model';
+import { ItemDetails } from '../models/read/item-details.model';
 import { EditItem } from '../models/write/edit-item.model';
 import { Items } from '../models/read/items.model';
 import { CreateItem } from '../models/write/create-item.model';
@@ -18,6 +18,23 @@ export class ItemsService {
     private appConfigurationService: AppConfigurationService
   ) {
 
+  }
+
+
+  toggleMonitoredItemAsync(itemId: string): Observable<Object> {
+    itemId = encodeURIComponent(itemId);
+    let response = this.httpClient.post(
+      this.appConfigurationService.webApiBaseUrl + `/api/items/` + itemId + "/monitored", null
+    );
+    return response;
+  }
+
+  toggleItemEnabledDisabledStatus(itemId: string): Observable<Object> {
+    itemId = encodeURIComponent(itemId);
+    let response = this.httpClient.post(
+      this.appConfigurationService.webApiBaseUrl + `/api/items/` + itemId + "/status", null
+    );
+    return response;
   }
 
   createItem(item: CreateItem): Observable<string> {
@@ -38,27 +55,41 @@ export class ItemsService {
     );
   }
 
-  getItems(take: string | null = "10", page: string | null = "1") : Observable<Items> {
+  getItems(enabledOnly: boolean | null = true, take: string | null = "10", page: string | null = "1"): Observable<Items> {
     
     const params = {
       take: take,
-      page: page
+      page: page,
+      enabled_only: enabledOnly
     }
 
     var response = 
           this.httpClient
-                    .get<Items>(this.appConfigurationService.webApiBaseUrl + `/api/items?take=` + take + "&page=" + page);
+            .get<Items>(
+              this.appConfigurationService.webApiBaseUrl 
+              + `/api/items?take=` + take 
+              + "&page=" + page 
+              + "&enabled_only=" + enabledOnly
+            ).pipe(
+              retry({count: 3, delay: 500}),
+              catchError((error: HttpErrorResponse) => {
+                if (error.status === 0) {
+                  // Server not responding, connection lost?
+                }
+                return throwError(() => error);
+              })
+            );
 
     return response;
   }
 
-  updateItemPartial(itemId: string): Observable<Object> {
-    let response = this.httpClient.patch(this.appConfigurationService.webApiBaseUrl + `/api/items/` + itemId, null);
-    return response;
-  }
+  // updateItemPartial(itemId: string): Observable<Object> {
+  //   let response = this.httpClient.patch(this.appConfigurationService.webApiBaseUrl + `/api/items/` + itemId, null);
+  //   return response;
+  // }
 
-  getItem(itemId: string) : Observable<Item> {
-    var response = this.httpClient.get<Item>(this.appConfigurationService.webApiBaseUrl + `/api/items/` + itemId);
+  getItem(itemId: string) : Observable<ItemDetails> {
+    var response = this.httpClient.get<ItemDetails>(this.appConfigurationService.webApiBaseUrl + `/api/items/` + itemId);
     return response;
   }
     
@@ -66,12 +97,17 @@ export class ItemsService {
 
     const formData = new FormData();
     formData.append('opis', editItem.opis ?? ''); // TODO check if valid
-    formData.append('kategorija', editItem.kategorija.toString());
+    formData.append('kategorija', editItem.kategorija?.toString() as string);
     formData.append('URLdoslike', editItem.URLdoslike ?? null);
 
-    formData.append('cijena', editItem.cijena.toString());
-    formData.append('datumakcije', editItem.datumakcije);
-    formData.append('retailerId', editItem.retailerId.toString());
+    formData.append('cijena', editItem.cijena?.toString() as string);
+    formData.append('datumakcije', editItem.datumakcije as string);
+    formData.append('retailerId', editItem.retailerId?.toString() as string);
+    formData.append('isEnabled', editItem.isEnabled?.toString() as string);
+    formData.append('deleteCurrentURLdoslike', editItem.deleteCurrentURLdoslike?.toString() as string);
+
+    // console.log(editItem);
+    // return of();
 
     let headers = new HttpHeaders();
 
@@ -93,7 +129,7 @@ export class ItemsService {
       take: request.take!,
       page: request.page!,
       sortBy: request.sortBy!,
-      searchQuery: request.searchQuery!
+      query: request.query!
     }
     
     return this.httpClient.get<ItemsSearchResponse>(this.appConfigurationService.webApiBaseUrl + `/api/items/search`, 

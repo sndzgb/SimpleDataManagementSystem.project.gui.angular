@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { Users } from "../models/read/users.model";
 import { CreateUser } from "../models/write/create-user.model";
 import { EditUser } from "../models/write/edit-user.model";
-import { UserDetails } from "../components/users/details/details.model";
+import { UserDetails } from "../models/read/user-details.model";
 
 @Injectable({
     providedIn: 'root'
