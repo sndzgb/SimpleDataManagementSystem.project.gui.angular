@@ -121,30 +121,28 @@
 
     <!-- TODO error message -->
     <div class="search-control-wrapper">
-        <form method="get" validatable asp-page="/Items/Search">
-            <div class="search-control">
-                <input 
-                    class="" 
-                    form-field-required 
-                    name="query"
-                    data-validation-required-error-message="Search query is required."
-                    placeholder="Enter a search query..."
-                    style="outline: none;  border: none; border-bottom: 1px solid gainsboro;" 
-                />
-                <button 
-                    type="submit" 
-                    class="search-input-control" 
-                    style="border: none; border-bottom: 1px solid gainsboro; background-color: white;"
+        <div class="search-control">
+            <input 
+                [(ngModel)]="inputValue" 
+                name="query"
+                i18n-placeholder
+                placeholder="Enter a search query..."
+                style="outline: none;  border: none; border-bottom: 1px solid gainsboro;" 
+            />
+            <button 
+                (click)="onSearchItemsClicked()" 
+                type="button" 
+                class="search-input-control"
+                style="border: none; border-bottom: 1px solid gainsboro; background-color: white;"
                 >
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-        </form>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+        <div style="text-align: center; color:red;">
+            <small *ngIf="inputValue == null" i18n>Search query is required.</small>
+        </div>
     </div>
 </div>
-
-
-
 
 
 <br />

@@ -67,8 +67,8 @@ export class LoginComponent extends FormComponent<LoginComponent> implements OnI
           this.authService.setAuthentication(data.jwt!);
 
           // TODO compare url with returnUrl
-          console.log("WINDOW:LOCATION:HREF");
-          console.log(window.location.href);
+          //console.log("WINDOW:LOCATION:HREF");
+          //console.log(window.location.href);
 
           let returnUrl = this.getQueryParamValueByKey(QueryParams.returnUrl);
 

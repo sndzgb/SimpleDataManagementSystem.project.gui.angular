@@ -36,13 +36,11 @@ export class LocalizationComponent extends NonRoutableComponent implements OnIni
     @Inject(LOCALE_ID) public activeLocale: string
   ) {
     super();
-    console.log("ctor()");
     this.selectedLanguage = this.localizationService.getLanguage();
   }
   
   override ngOnInit(): void {
     super.ngOnInit();
-    console.log("onInit()");
   }
   
   src: string = `./assets/resources/${this.activeLocale}.png`;

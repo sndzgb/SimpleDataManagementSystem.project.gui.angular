@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 import { FormComponent } from '../../base/form/form.component';
 import { WebApiHttpError } from 'src/app/errors/web-api-http-error.error';
-import { UserDetails } from '../details/details.model';
+import { UserDetails } from 'src/app/models/read/user-details.model';
 
 @Component({
   selector: 'delete-user',

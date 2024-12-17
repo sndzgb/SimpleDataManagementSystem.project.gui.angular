@@ -32,8 +32,6 @@ export class CreateCategoryComponent extends FormComponent<CreateCategory> imple
 
     this.formGroup.addControl("name", new FormControl(null, [ Validators.required ]));
     this.formGroup.addControl("priority", new FormControl(null, [ Validators.required ]));
-
-
   }
 
   onCreateCategoryFormSubmitted() {

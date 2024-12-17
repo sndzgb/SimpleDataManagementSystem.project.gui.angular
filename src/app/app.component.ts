@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy { // TODO extends RoutableComponent
 
-
   toastVisible: boolean = false;
   internalVisible: boolean = true;
   private toastShownSubscription: Subscription | null = null;

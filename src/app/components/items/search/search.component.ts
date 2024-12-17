@@ -117,8 +117,6 @@ export class ItemsSearchComponent extends FormComponent<ItemsSearchResponse> imp
     });
   }
 
-  text: string = "<span style='background-color:yellow; font-weight:bold;'>Hello</span>, World!";
-
   override ngOnDestroy(): void {
     super.ngOnDestroy();
   }
