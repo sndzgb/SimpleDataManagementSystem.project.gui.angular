@@ -7,21 +7,64 @@ export class ItemsSearchRequest {
     }
 
     sortBy: SortableItem = SortableItem.nazivproizvodaAsc;
-    searchQuery: string | null = "";
+    query: string | null = "";
     page: number | null = 1;
     take: number | null = 8;
 }
 
 export class ItemsSearchResponse {
     items: ItemsSearchResult[] | null = null;
-    request: ItemsSearchRequest | null = null;
+    
+    // request: ItemsSearchRequest | null = null;
     pageInfo: PageInfo | null = null;
 }
 
 export class ItemsSearchResult {
-    nazivproizvoda: string | null = null;
+
+    nazivproizvoda: string | undefined;
+    opis: string | null = null;
     cijena: number | null = null;
-    URLdoslikeUri: string | null = null;
+    datumakcije: string | null = null;
+    URLdoslike: string | null = null;
+    nazivretailera: string | null = null;
+
+    category: Category | null = null;
+    retailer: Retailer | null = null;
+
+    totalUsersMonitoringThisItem: number | undefined;
+    isMonitoredByUser: boolean | undefined;
+
+    // nazivproizvoda: string | null = null;
+    // cijena: number | null = null;
+    // URLdoslikeUri: string | null = null;
+}
+
+// export class Item {
+//     nazivproizvoda: string | undefined;
+//     opis: string | null = null;
+//     cijena: number | null = null;
+//     datumakcije: string | null = null;
+//     URLdoslike: string | null = null;
+//     nazivretailera: string | null = null;
+
+//     category: Category | null = null;
+//     retailer: Retailer | null = null;
+
+//     totalUsersMonitoringThisItem: number | undefined;
+//     isMonitoredByUser: boolean | undefined;
+// }
+
+export class Retailer {
+    id: number | undefined;
+    name: string | undefined;
+    priority: number | undefined;
+    logoImageUrl: string | undefined;
+}
+
+export class Category {
+    id: number | undefined;
+    name: string | undefined;
+    priority: number | undefined;
 }
 
 export enum SortableItem {

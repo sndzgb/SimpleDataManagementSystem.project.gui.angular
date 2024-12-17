@@ -6,6 +6,7 @@ export class CreateItem {
     private _cijena: number | undefined;
     private _kategorija: number | undefined;
     private _URLdoslike: File | null | undefined;
+    private _isEnabled: boolean | null | undefined;
 
     private _formData: FormData | undefined;
 
@@ -17,6 +18,7 @@ export class CreateItem {
     cijena: number | undefined;
     kategorija: number | undefined;
     URLdoslike: File | null | undefined;
+    isEnabled: boolean | null | undefined;
 
     constructor(init?: Partial<CreateItem>) {
         Object.assign(this, init);

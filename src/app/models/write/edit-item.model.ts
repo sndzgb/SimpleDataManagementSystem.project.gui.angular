@@ -4,58 +4,78 @@ export class EditItem {
         Object.assign(this, init);
     }
 
-    private _opis: string | null = null;
-    private _datumakcije: string | null = null;
-    private _retailerId: number | null = null;
-    private _cijena: number | null = null;
-    private _kategorija: number | null = null;
-    private _URLdoslike: File | any;
+    opis: string | undefined;
+    datumakcije: string | undefined;
+    retailerId: number | undefined;
+    cijena: number | undefined;
+    kategorija: number | undefined;
+    URLdoslike: File | any;
+    isMonitoredByCurrentUser: boolean | undefined;
+    
+    deleteCurrentURLdoslike: boolean | undefined;
+    isEnabled: boolean | undefined;
 
-    get opis(): string | null{
-        return this._opis || null;
-    }
+    // private _opis: string | null = null;
+    // private _datumakcije: string | null = null;
+    // private _retailerId: number | null = null;
+    // private _cijena: number | null = null;
+    // private _kategorija: number | null = null;
+    // private _URLdoslike: File | any;
+    // private _deleteCurrentURLdoslike: boolean | null = null;
 
-    set opis(opis: string | null) {
-        this._opis = opis;
-    }
+    // get deleteCurrentURLdoslike(): boolean | null {
+    //     return this._deleteCurrentURLdoslike;
+    // }
 
-    get datumakcije(): string {
-        return this._datumakcije!;
-    }
+    // set deleteCurrentURLdoslike(deleteCurrentURLdoslike: boolean) {
+    //     this._deleteCurrentURLdoslike = deleteCurrentURLdoslike;
+    // }
 
-    set datumakcije(datumakcije: string) {
-        this._datumakcije = datumakcije;
-    }
+    // get opis(): string | null {
+    //     return this._opis || null;
+    // }
 
-    get URLdoslike(): File { // | null {
-        return this._URLdoslike;
-    }
+    // set opis(opis: string | null) {
+    //     this._opis = opis;
+    // }
 
-    set URLdoslike(file: File | any) {
-        this._URLdoslike = file;
-    }
+    // get datumakcije(): string {
+    //     return this._datumakcije!;
+    // }
 
-    get cijena(): number {
-        return this._cijena!;
-    }
+    // set datumakcije(datumakcije: string) {
+    //     this._datumakcije = datumakcije;
+    // }
 
-    set cijena(cijena: number) {
-        this._cijena = cijena;
-    }
+    // get URLdoslike(): File { // | null {
+    //     return this._URLdoslike;
+    // }
 
-    get kategorija(): number {
-        return this._kategorija!;
-    }
+    // set URLdoslike(file: File | any) {
+    //     this._URLdoslike = file;
+    // }
 
-    set kategorija(kategorija: number) {
-        this._kategorija = kategorija;
-    }
+    // get cijena(): number {
+    //     return this._cijena!;
+    // }
 
-    get retailerId(): number {
-        return this._retailerId!;
-    }
+    // set cijena(cijena: number) {
+    //     this._cijena = cijena;
+    // }
 
-    set retailerId(retailerId: number) {
-        this._retailerId = retailerId;
-    }
+    // get kategorija(): number {
+    //     return this._kategorija!;
+    // }
+
+    // set kategorija(kategorija: number) {
+    //     this._kategorija = kategorija;
+    // }
+
+    // get retailerId(): number {
+    //     return this._retailerId!;
+    // }
+
+    // set retailerId(retailerId: number) {
+    //     this._retailerId = retailerId;
+    // }
 }
