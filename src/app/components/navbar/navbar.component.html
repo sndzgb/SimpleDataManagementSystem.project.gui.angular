@@ -1,4 +1,175 @@
-<div class="container" style="margin-top: 10px; margin-bottom:10px;">
+<div class="container">
+
+	<div class="special">
+		<div class="link logo">
+            <a [routerLink]="['/']" class="navbarItem"><img src="favicon.ico" alt="logo" /></a>
+			<!-- <a href="/" class="logo navbarItem"><img src="/favicon.ico" alt="logo" /></a> -->
+		</div>
+
+		<div class="hamb">
+			<button type="button" (click)="onHambClicked(this)">
+				<span>&equiv;</span>
+			</button>
+		</div>
+	</div>
+
+	<ng-container
+        *ngVisibleIfHasPermissions="{ 
+            permissions: [appPermissions.IsAuthenticated], 
+            values: [
+                (
+                    (
+                        this.authService.isAuthenticated()
+                    )
+                ).toString()
+            ]
+        }"
+    >
+        <!-- categories -->
+        <div class="link toggleable collapsed not-collapsed">
+            <a [routerLink]="['/categories']" [routerLinkActive]="'active'" class="navbarItem">Categories</a>
+        </div>
+
+        <!-- retailers -->
+		<div class="link toggleable collapsed not-collapsed">
+            <a [routerLink]="['/retailers']" [routerLinkActive]="'active'" class="navbarItem">Retailers</a>
+		</div>
+
+        <!-- users -->
+        <div class="link toggleable collapsed not-collapsed">
+                <a [routerLink]="['/users']"
+                [routerLinkActive]="'active'" 
+                class="navbarItem"
+                *ngVisibleIfHasPermissions="{ 
+                    permissions: [appPermissions.HasRoleAdmin], 
+                    values: [
+                        (this.roles.Admin.toString() 
+                            ==
+                        this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)).toString()
+                    ]
+                }"
+            >
+                Users
+            </a>
+        </div>
+
+        <!-- items -->
+        <ng-container 
+            *ngVisibleIfHasPermissions="{ 
+                permissions: [appPermissions.IsInRole], 
+                values: [
+                    (
+                        (
+                            this.roles.Admin.toString() 
+                            ==
+                            this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                        )
+                        ||
+                        (
+                            this.roles.Employee.toString() 
+                            ==
+                            this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                        )
+                    ).toString()
+                ]
+            }"
+        >
+            <div class="link toggleable collapsed not-collapsed">
+                <div>
+                    <a [routerLink]="['/items']" [routerLinkActive]="'active'" class="navbarItem">Items</a>
+                        <button class="dropdown">
+                            <span class="dropdown-caret">
+                                <i class="fa-solid fa-caret-up"  (click)="onExpandClicked($event.target)"></i>
+                            </span>
+					    </button>
+                </div>
+
+                <div class="dropdown-options collapsed-items-dropdown-menu bordered">
+                    <!-- *admin only* -->
+                    <ng-container
+                        *ngVisibleIfHasPermissions="{ 
+                            permissions: [appPermissions.IsInRole], 
+                            values: [
+                                (
+                                    (
+                                        this.roles.Admin.toString() 
+                                        ==
+                                        this.authService.getAuthenticationItemValueByKey(authenticationItems.Role)
+                                    )
+                                ).toString()
+                            ]
+                        }"
+                    >
+                        <a [routerLink]="['/items/monitored']" [routerLinkActive]="'active'" class="navbarItem">
+                            Items Being Monitored
+                        </a>
+                        <div class="divider-hd-visible">
+                            <hr class="visual-divider" />
+                        </div>
+                    </ng-container>
+                    <!-- *admin only* -->
+                    
+                    <a [routerLink]="['/items/my-monitored-items']" [routerLinkActive]="'active'" class="navbarItem">
+                        My monitored items
+                    </a>
+                    <!-- small screen divider START -->
+                    <div class="divider"> 
+                        <hr class="visual-divider" />
+                    </div>
+                    <!-- small screen divider END -->
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="link toggleable collapsed not-collapsed">
+            <div>
+                <a [routerLink]="['/account']" [routerLinkActive]="'active'" class="navbarItem">Account</a>
+            </div>
+        </div>
+
+        <div class="link logout toggleable collapsed not-collapsed">
+            <logout>
+            </logout>
+
+            <!-- <a [routerLink]="['/account/logout']" [routerLinkActive]="'active'" class="navbarItem">Logout</a> -->
+
+            <!-- <logout style="margin-left: auto;"></logout> -->
+            <!-- <logout class="logout">
+            </logout> -->
+
+            <!-- <form method="post" name="form-logout" asp-page="/Account/Logout" asp-area="">
+                <a [routerLink]="['/account/logout']" [routerLinkActive]="'active'" class="navbarItem">Logout</a>
+            </form> -->
+        </div>
+        
+    </ng-container>
+
+    <!-- *not authenticated* -->
+    <ng-container>
+        <div
+            class="link logout toggleable collapsed not-collapsed"
+            *ngVisibleIfHasPermissions="{ 
+                permissions: [appPermissions.IsAnonymous], 
+                values: [(!authenticated).toString()] 
+            }"
+        >
+            <a class="login" [routerLink]="['/account/login']">
+                Login
+            </a>
+        </div>
+    </ng-container>
+
+
+    <div class="link toggleable collapsed not-collapsed">
+        <localization></localization>
+    </div>
+
+</div>
+
+
+
+
+<!-- <div class="container" style="margin-top: 10px; margin-bottom:10px;">
     <a [routerLink]="['/']" class="logo navbarItem"><img src="/favicon.ico" alt="logo" /></a>
 
     <div class="hamb">
@@ -81,4 +252,4 @@
             </a>
     </div>
 
-</div>
+</div> -->

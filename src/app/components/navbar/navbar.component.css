@@ -1,113 +1,26 @@
-.container a {
-    margin:5px;
-    text-decoration: none;
-}
 
 
-@media (min-width:601px) {
-    .container {
-        display:flex;
-        align-items: center;
-    }
 
-    .container .search {
-        margin-left: auto;
-    }
 
-    .hamb {
-        display:none;
-    }
 
-    /* .container .logout {
-        margin-left: auto;
-    } */
 
-    .container .account {
-        margin-left: auto;
-    }
 
-    .container .links {
-        display: flex;
-        width: 100%;
-    }
 
-    .container .links .logout {
-        margin-left: auto;
-        /* justify-content: space-between; */
-    }
 
-    .container .links .login {
-        margin-left: auto;
-    }
 
-    .logout {
-        margin-top: 5px;margin-right: 5px;margin-bottom: 5px;margin-left: auto;
-    }
-}
 
-.collapsed {
-    display: none;
-}
 
-@media only screen and (max-width: 600px) {
-    
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        /* flex-direction: column;
-        flex-wrap: wrap; */
-        justify-content: space-between;
-    }
 
-    .container .links {
-        /* flex-wrap: 1; */
-        /* flex-direction: column; */
-        /* flex-wrap: wrap; */
-        flex-basis: 100%;
-        height: fit-content;
-        /* display: none; */
-    }
 
-    .container .links a {
-        display: flex;
-        /* color:yellow; */
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
 
-    /* .container .links a {
-        color: yellow;
-        flex-direction: column;
-        flex-wrap: wrap;
-    } */
 
-    .hamb {
-        margin:5px;
-    }
 
-    .hamb button {
-        border: none;
-        background-color: white;
-    }
 
-    .logo {
-        display: inline;
-        width: fit-content;
-        flex-wrap: 1;
-    }
 
-    /* .logo::after {
-        content: "";
-    } */
 
-    .logout {
-        margin-top: 5px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        margin-left: auto;
-        /* border-top: 1px solid gainsboro; */
-    }
-}
+
+
+
 
 
 
@@ -118,6 +31,140 @@
     color:red;
 }
 
-/* .logout {
+
+
+
+
+
+.link, .expand, .other, .hamb {
+    display: inline-block;
+    padding: 5px;
+    margin: 0px;
+}
+
+.dropdown-options {
+    position: absolute;
+}
+
+.collapsed-items-dropdown-menu {
+    display: none;
+}
+
+a {
+    padding: 5px 8px;
+    text-decoration:none;
+}
+
+
+@media only screen and (max-width: 870px) {
+    .dropdown-options {
+        position: relative;
+    }
+
+    .dropdown-options a {
+        padding: 0px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .special {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .hamb {
+        margin-left: auto;
+    }
+
+    .collapsed {
+        display: none;
+    }
+
+    .divider {
+        display: block;
+    }
+
+    .bordered {
+        border:none;
+    }
+
+    .dropdown-item {
+        margin-left: 20px;
+    }
+
+    
+    /*added*/
+    .link {
+        text-align: center;
+    }
+}
+
+
+.dropdown-options {
+    background-color: white;
+    border: 1px solid gainsboro;
+    border-top: none;
+}
+
+.visual-divider {
+    margin: 0px;
+}
+
+
+@media only screen and (min-width: 871px) {
+    .hamb {
+        display: none;
+    }
+
+    .logout {
+        margin-left: auto;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+    }
+
+    .divider {
+        display: none;
+    }
+}
+
+.dropdown-container {
+}
+
+.dropdown {
+    border: none;
     cursor: pointer;
-} */
+    padding:0px;
+    margin:0px;
+}
+
+.dropdown:hover {
+}
+
+.dropdown-item {
+    color: #0d6efd;
+}
+
+.dropdown-item:hover {
+    background-color: transparent;
+    text-decoration: none;
+    color: #0a58ca;
+}
+
+
+.active-navbar-link {
+    color: red !important;
+    text-decoration: underline;
+}
+
+.hamb button {
+    border: none;
+    background-color: white;
+}
