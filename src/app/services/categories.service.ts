@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { Categories } from "../models/read/categories.model";
 import { CreateCategory } from "../models/write/create-category.model";
 import { EditCategory } from "../models/write/edit-category.model";
-import { Category } from "../models/read/category.model";
+import { CategoryDetails } from "../models/read/category-details.model";
 
 @Injectable({
     providedIn: 'root'
@@ -46,8 +46,8 @@ export class CategoriesService {
         );
     }
 
-    getCategoryById(categoryId: number): Observable<Category> {
-        return this.httpClient.get<Category>(this.appConfigurationService.webApiBaseUrl + `/api/categories/` + categoryId);
+    getCategoryById(categoryId: number): Observable<CategoryDetails> {
+        return this.httpClient.get<CategoryDetails>(this.appConfigurationService.webApiBaseUrl + `/api/categories/` + categoryId);
     }
 
     deleteCategory(categoryId: number): Observable<Object> {

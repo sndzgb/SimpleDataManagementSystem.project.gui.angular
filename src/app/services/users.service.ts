@@ -2,10 +2,10 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AppConfigurationService } from "./app-configuration.service";
 import { Observable } from "rxjs";
-import { User } from "../models/read/user.model";
 import { Users } from "../models/read/users.model";
 import { CreateUser } from "../models/write/create-user.model";
 import { EditUser } from "../models/write/edit-user.model";
+import { UserDetails } from "../components/users/details/details.model";
 
 @Injectable({
     providedIn: 'root'
@@ -34,8 +34,8 @@ export class UsersService {
         return this.httpClient.get<Users>(this.appConfigurationService.webApiBaseUrl + `/api/users`, { params: params });
     }
 
-    getUser(userId: number): Observable<User> {
-        var response = this.httpClient.get<User>(this.appConfigurationService.webApiBaseUrl + `/api/users/` + userId);
+    getUser(userId: number): Observable<UserDetails> {
+        var response = this.httpClient.get<UserDetails>(this.appConfigurationService.webApiBaseUrl + `/api/users/` + userId);
         return response;
     }
 

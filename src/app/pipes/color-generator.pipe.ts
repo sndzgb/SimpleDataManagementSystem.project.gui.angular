@@ -36,4 +36,4 @@ export class ColorGeneratorPipe implements PipeTransform {
     return this.cyrb53(s);
   }
 
-  }
+}

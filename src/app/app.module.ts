@@ -57,6 +57,7 @@ import { EmbeddedFormComponent } from './components/base/embedded-form/embedded-
 import { UserDetailsComponent } from './components/users/details/details.component';
 import { ItemsSearchComponent } from './components/items/search/search.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
+import { BooleanToYesNoPipe } from './pipes/boolean-to-yes-no.pipe';
 import { NotificationsSidebarComponent } from './components/notifications-sidebar/notifications-sidebar.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { LocalizationComponent } from './components/localization/localization.component';
@@ -81,6 +82,7 @@ import { LocalizationComponent } from './components/localization/localization.co
     NumbersOnlyDirective,
     LoginComponent,
     ColorGeneratorPipe,
+    BooleanToYesNoPipe,
     SanitizeHtmlPipe,
     LogoutComponent,
     EditItemComponent,
@@ -138,9 +140,9 @@ import { LocalizationComponent } from './components/localization/localization.co
           };
         }
       },
-      [ ColorGeneratorPipe ]
+      [ ColorGeneratorPipe, BooleanToYesNoPipe ]
   ],
-  exports: [ ColorGeneratorPipe ],
+  exports: [ ColorGeneratorPipe, BooleanToYesNoPipe ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

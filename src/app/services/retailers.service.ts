@@ -4,8 +4,8 @@ import { EMPTY, Observable, of } from "rxjs";
 import { AppConfigurationService } from "./app-configuration.service";
 import { Retailers } from "../models/read/retailers.model";
 import { CreateRetailer } from "../models/write/create-retailer.model";
-import { Retailer } from "../models/read/retailer.model";
 import { EditRetailer } from "../models/write/edit-retailer.model";
+import { RetailerDetails } from "../models/read/retailer-details.model";
 
 @Injectable({
     providedIn: 'root'
@@ -24,8 +24,8 @@ export class RetailersService {
         return this.httpClient.get<Retailers>(this.appConfigurationService.webApiBaseUrl + `/api/retailers`, {params: params});
     }
 
-    getRetailer(retailerId: number): Observable<Retailer> {
-        return this.httpClient.get<Retailer>(this.appConfigurationService.webApiBaseUrl + `/api/retailers/` + retailerId);
+    getRetailer(retailerId: number): Observable<RetailerDetails> {
+        return this.httpClient.get<RetailerDetails>(this.appConfigurationService.webApiBaseUrl + `/api/retailers/` + retailerId);
     }
 
     createRetailer(model: CreateRetailer): Observable<Object> {
@@ -42,6 +42,8 @@ export class RetailersService {
         formData.append('name', model.name!);
         formData.append('priority', model.priority?.toString()!);
         formData.append('logoImage', model.logoImage!);
+        formData.append('deleteCurrentLogoImage', model.deleteCurrentLogoImage?.toString() as string);
+        
         return this.httpClient.put(this.appConfigurationService.webApiBaseUrl + `/api/retailers/` + retailerId, formData);
     }
 

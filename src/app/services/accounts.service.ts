@@ -2,10 +2,10 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest } from '@angula
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { AppConfigurationService } from './app-configuration.service';
-import { User } from '../models/read/user.model';
 import { UpdatePassword } from '../models/write/update-password.model';
 import { Login } from '../models/read/login.model';
 import { AuthToken } from '../models/read/auth-token.model';
+import { UserDetails } from '../models/read/user-details.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,8 +28,8 @@ export class AccountsService {
     return response;
   }
 
-  getAccountDetails(): Observable<User> {
-    return this.httpClient.get<User>(this.appConfigurationService.webApiBaseUrl + `/api/accounts/details`);
+  getAccountDetails(): Observable<UserDetails> {
+    return this.httpClient.get<UserDetails>(this.appConfigurationService.webApiBaseUrl + `/api/accounts/details`);
   }
 
   updatePassword(model: UpdatePassword): Observable<Object> {
